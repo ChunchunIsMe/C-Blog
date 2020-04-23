@@ -37,6 +37,7 @@
 
 运用场景: redux就是很经典的策略模式，reducer是策略类 dispatch是环境类
 ### 解释器模式（Interpreter）
+
 ### 发布-订阅模式（public-Subscribe）
 ### 责任链模式（Chian of Responsibility）
 ### 迭代器模式（Iterator）
