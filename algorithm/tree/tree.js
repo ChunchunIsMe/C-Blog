@@ -18,10 +18,10 @@ class Tree {
   static preOrderCallback(node, callback) {
     callback(node);
     if (node.left) {
-      callback(node.left)
+      this.preOrderCallback(node.left)
     }
     if (node.right) {
-      callback(node.right)
+     this.preOrderCallback(node.right)
     }
   }
 
@@ -42,24 +42,23 @@ class Tree {
 
   static midOrderCallback(node, callback) {
     if (node.left) {
-      callback(node.left)
+      this.midOrderCallback(node.left)
     }
     callback(node);
     if (node.right) {
-      callback(node.right)
+      this.midOrderCallback(node.right)
     }
   }
 
   static afterOrderCallback(node, callback) {
     if (node.left) {
-      callback(node.left)
+      this.midOrderCallback(node.left)
     }
     if (node.right) {
-      callback(node.right)
+      this.midOrderCallback(node.right)
     }
     callback(node);
   }
-
 
 }
 
