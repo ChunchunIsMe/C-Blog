@@ -21,7 +21,7 @@ class Tree {
       this.preOrderCallback(node.left)
     }
     if (node.right) {
-     this.preOrderCallback(node.right)
+      this.preOrderCallback(node.right)
     }
   }
 
@@ -34,7 +34,7 @@ class Tree {
         stash.push(item.right)
       }
 
-      if(item.left) {
+      if (item.left) {
         stash.push(item.left)
       }
     }
@@ -62,3 +62,29 @@ class Tree {
 
 }
 
+// 知道前序遍历和中序遍历重建树
+
+function getTree(start, mid) {
+  if (!(start.length && mid.length)) {
+    return null;
+  }
+  const value = start[0];
+  const midIndex = mid.indexOf(start[0]);
+  const leftStart = start.slice(1, 1 + midIndex);
+  const leftMid = mid.slice(0, midIndex);
+  const rightStart = start.slice(1 + midIndex);
+  const rightMid = mid.slice(midIndex + 1);
+  const left = getTree(leftStart, leftMid);
+  const right = getTree(rightStart, rightMid);
+  return {
+    value,
+    left,
+    right
+  }
+}
+
+const node = getTree([1, 2, 4, 7, 3, 5, 6, 8], [4, 7, 2, 1, 5, 3, 8, 6]);
+
+// 知道后序遍历和中序遍历同理
+
+// 但是知道后续遍历和前序遍历树 如果是有节点单边的时候无法确定子节点是左子节点还是右子节点
