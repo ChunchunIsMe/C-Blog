@@ -50,18 +50,18 @@ class Tree {
     }
   }
 
-  static midOrderCircle(node, callback) {
-    const stash = [node];
-    while (stash.length) {
-      if(stash[length-1].right) {
-        stash.push(right)
-      }
-      if(stash[length-1].left) {
-        stash.unshift(left)
-      }
+  // static midOrderCircle(node, callback) {
+  //   const stash = [node];
+  //   while (stash.length) {
+  //     if(stash[length-1].right) {
+  //       stash.push(right)
+  //     }
+  //     if(stash[length-1].left) {
+  //       stash.unshift(left)
+  //     }
       
-    }
-  }
+  //   }
+  // }
 
   static afterOrderCallback(node, callback) {
     if (node.left) {
