@@ -1,0 +1,22 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "当你要使用webpack打包一个sdk的时候,使用普通的webpack配置是不行的，这个时候需要使用特殊的属性来进行打包配置",
+  "main": "index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=development webpack --config webpack.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
+    "lodash": "^4.17.15",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "webpack-bundle-analyzer": "^3.7.0"
+  }
+}
