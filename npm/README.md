@@ -89,4 +89,4 @@ registry=https://registry.npm.taobao.org/
   #### optionalDependencies
   可选依赖，如果有一些依赖包即使安装失败，项目依然能够运行或者希望 npm 继续运行，就可以使用 optionalDependencies。但是 optionalDependencies 会覆盖 dependencies 中的同名依赖包，所以不要在两个地方都写
 ## module vs browser vs main
-## bin 和 npx
+## npx 和 bin
