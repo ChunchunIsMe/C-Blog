@@ -51,7 +51,15 @@ publishConfig: 发布时使用的配置值
 registry=https://registry.npm.taobao.org/
 ```
 就可以设置源了，而在当前目录下运行npm，规则也会按照.npmrc的规则来进行，而不是使用全局的
-## 包的发布
+## 包的发布和调试
+  ### 包的发布
+  ```
+  npm adduser
+  npm login
+  npm publish [name] // 如果已经在该源登录了npm账号则可以直接跳过上面两步
+  ```
+  ### 包的调试
+
 ## 几个 dependencies 的区别
 1. dependencies
 2. devDependencies
@@ -77,7 +85,7 @@ registry=https://registry.npm.taobao.org/
     当外部要用你的包的时候 peerDependencies 就会明确告诉使用方,你需要使用哪个版本的 antd
     > npm1 和 npm2 会自动安装同等依赖，npm3 不再自动安装，会产生警告，需要手动在`package.json`添加依赖项。
   #### bundledDependencies/bundleDependencies
-  打包依赖，bundledDependencies是一个包含依赖包名的数组对象，在发布时会将这个对象中的包打包到最终的发布包中。
+  打包依赖，bundledDependencies是一个包含依赖包名的数组对象，在发布时会将这个对象中的包打包到最终的发布包中。但是这个包必须在 devDependencies 或dependencies 声明过，否则打包会报错。这里就不做例子了因为现在打包都不用 npm pack 了都用 webpack 所以这个没什么用
   #### optionalDependencies
   可选依赖，如果有一些依赖包即使安装失败，项目依然能够运行或者希望 npm 继续运行，就可以使用 optionalDependencies。但是 optionalDependencies 会覆盖 dependencies 中的同名依赖包，所以不要在两个地方都写
 ## module vs browser vs main
