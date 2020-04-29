@@ -59,7 +59,14 @@ registry=https://registry.npm.taobao.org/
   npm publish [name] // 如果已经在该源登录了npm账号则可以直接跳过上面两步
   ```
   ### 包的调试
+  可以使用 npm link 进行包的测试
 
+  当项目和模块在同一个目录下的时候,在项目目录下运行`npm link ../模块文件夹名`
+
+  当项目和模块不在同一个目录下的时候,模块目录下运行`npm link`进行全局link,然后在项目中`npm link 模块名`
+
+  如果需要解除项目和模块之间的link,项目目录下执行 `npm unlink 模块名`
+  如果需要解除模块的全局link, 模块目录下执行`npm unlink 模块名`
 ## 几个 dependencies 的区别
 1. dependencies
 2. devDependencies
@@ -89,4 +96,18 @@ registry=https://registry.npm.taobao.org/
   #### optionalDependencies
   可选依赖，如果有一些依赖包即使安装失败，项目依然能够运行或者希望 npm 继续运行，就可以使用 optionalDependencies。但是 optionalDependencies 会覆盖 dependencies 中的同名依赖包，所以不要在两个地方都写
 ## module vs browser vs main
+先是几种模块化思想的规范
+1. CommonJS (Node环境使用的规范)
+2. AMD(Asynchronous Module Definition) 用define的,没用过
+3. CMD 和AMD一样都是用define的
+4. ESM(ESMA Sctipt Module) ES6的模块化
+
+main: 定义了 npm 包的入口文件, browser 环境和 node 环境均可用
+module: 定义 npm 包的 ESM 规范的入口文件, browser 环境和 node 环境均可用
+browser: 定义了 npm 包在 browser 环境的入口文件
+
+当CommonJS规范的时候直接走`main`
+
+当ESM规范查找包的时候顺序是
+![ESM](./packageIn.jpg "ESM")
 ## npx 和 bin
