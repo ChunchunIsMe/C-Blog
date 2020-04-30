@@ -110,4 +110,88 @@ browser: 定义了 npm 包在 browser 环境的入口文件
 
 当ESM规范查找包的时候顺序是
 ![ESM](./packageIn.jpg "ESM")
-## npx 和 bin
+## bin
+  package.json 的 bin 属性可以设定可执行文件，当包的使用者安装包的时候，如果安装的包 package.json 中有 bin 字段则会将bin字段下路径的可执行文件软链接到包的使用者的 /node_modules/.bin 中 如果是全局安装包的话就会链接到 /usr/local/bin/
+
+  创建testpackage文件夹 npm init -y 后新建 bin 文件夹, 创建q-cli.js
+  ```
+  #!/usr/bin/env node
+  // #!/usr/bin/env node 这句话的意思是让node执行这个解释程序
+  console.log('q-cli123')
+  ```
+  然后在package.json中加入
+  ```
+  // package.json
+  {
+    "bin": {
+      "q-cli": "./bin/q-cli.js"
+    }
+  }
+  ```
+  在testpackage文件夹下创建testnode文件夹 npm init -y 之后 npm link ../testpackage 之后你就会发现在 node_modules 下有一个.bin文件这个文件下有q-cli.js 这个时候你就可以直接在 testpackage 直接执行 q-cli 命令行则打出了 q-cli123
+
+  例子: 
+  1. [包](./testpackage)
+  2. [使用者](./testnode)
+## npx
+老版本的 npm 如果想要调用 node_modules 下的 .bin 文件,命令行下必须 node_modules/.bin/xxx 或者在 package 下的 script 中加运行 npm run xxx 而 npx 就是解决这个问题的 虽然高版本的 npm 现在可以直接命令行调用 xxx 可达到 node_modules/.bin/xxx 的效果,但是 npx 的功能不止于此
+
+1. 在命令行执行本地已经安装的依赖包命令
+```
+// 这个很简单直接npx就行了
+npx xxx
+```
+2. 不进行全局安装，直接在命令行执行一次性命令
+```
+// 没想到吧还是 npx xxx
+npx create-react-app my-react-app
+```
+> 这样 npx 会将 create-react-app 下载到一个临时目录，使用之后就会删除，每次运行这个命令都会重新下载依赖包，然后运行完删除
+
+> 可以使用这个功能来使用`http-server`来在当前启动一个Web服务
+```
+npx http-server // 返回当前文件夹下的index.html
+npx http-server -p 3000 // 指定端口
+```
+运行完 http-server 就会删除
+3. 使用不同版本的 node
+
+使用这个功能可以 可以指定 某个版本的 Node 运行脚本。用完之后再删掉
+```
+npx node@0.12.8 ./test.js 
+```
+或者使用 -p 参数，这个参数用于指定 npx 所要安装的模块。所以也可以写成这样
+```
+npx -p node@0.12.8 node ./test.js
+```
+4. npx 执行 Github 源码
+```
+npx github:piuccio/cowsay hello
+```
+> 注意远程代码必须是一个模块,必须包含`package.json`和入口脚本
+
+5. 其他参数
+
+除了 -p 参数 还有很多其他的参数
+
+--no-install 和 --ignore-existing
+```
+npx --no-install http-server // 不加载远程模块，强制使用本地模块，如果本地没有就报错
+```
+而 --ignore-existing 正好相反
+```
+npx --ignore-existing http-server // 不加载本地模块，强制使用远程模块
+```
+-c 参数
+```
+npx -p lolcatjs -p cowsay 'cowsay hello | lolcatjs' // 报错
+```
+因为第一项 cowsay hello 是由 npx 的 cowsay  解释，而第二项是由 shell 的 cowsay 解释，如果全局没有装 cowsay 就报错
+```
+npx -p lolcatjs -p cowsay -c 'cowsay hello | lolcatjs' // 有了 -c 就可以了
+```
+-c 的另一个作用就是将是将环境变量带入所要执行的命令。举例来说，npm 提供当前项目的一些环境变量，可以用下面的命令查看。
+```
+npx -c 'echo "$npm_package_name"'
+```
+上面会打印出环境变量npm_package_name即包名

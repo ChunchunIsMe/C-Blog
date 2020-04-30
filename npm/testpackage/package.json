@@ -1,0 +1,16 @@
+{
+  "name": "testpackage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "b.js",
+  "module": "a.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "q-cli": "./bin/q-cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
