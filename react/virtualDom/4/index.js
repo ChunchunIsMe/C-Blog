@@ -100,6 +100,66 @@ function diffChildren(newVDom, parent) {
       nodesWithoutKey[nodesWithoutKeyCount++] = child
     }
   }
+
+  for (let i = 0; i < vLength; i++) {
+    const vChild = vChildren[i],
+      vProps = vChild.props;
+    let dom;
+    const vKey = vProps !== undefined ? vProps.key : undefined;
+    if (vKey !== undefined) {
+      if (nodesWithKeyCount && nodesWithKey[vkey] !== undefined) {
+        dom = nodesWithKey[vKey];
+        delete nodesWithKey[vKey];
+        nodesWithKeyCount--;
+      }
+    } else if (min < nodesWithoutKeyCount) {
+      for (let j = 0; j < nodesWithoutKeyCount; j++) {
+        const element = nodesWithoutKey[j];
+        if (element !== undefined && isSameType(element, vChild)) {
+          dom = element;
+          nodesWithoutKey[j] = undefined;
+          if (j === min) {
+            min++
+          }
+          if (j === nodesWithoutKeyCount - 1) {
+            nodesWithoutKeyCount--
+          }
+          break;
+        }
+      }
+    }
+
+    const isUpdate = diff(dom, vChild, parent);
+    if (isUpdate) {
+      const originChild = childNodes[i];
+      if (originChild !== dom) {
+        parent.insertBefore(dom, originChild);
+      }
+    }
+  }
+
+  if (nodesWithKeyCount) {
+    for (const key in nodesWithKey) {
+      if (nodesWithKey.hasOwnProperty(key)) {
+        const element = nodesWithKey[key];
+        parent.removeChild(element);
+      }
+    }
+  }
+
+  while (min < nodesWithoutKeyCount) {
+    const node = nodesWithoutKeyCount[nodesWithoutKeyCount--];
+    if(node!==undefined) {
+      node.parentNode.removeChild(node);
+    }
+  }
+
+  // if (nodesWithoutKeyCount) {
+  //   for (let i = 0; i < nodesWithoutKeyCount; i++) {
+  //     const element = nodesWithoutKey[i];
+  //     parent.removeChild(element);
+  //   }
+  // }
   // const childrenLength = Math.max(parent.childNodes.length, newVDom.children.length)
 
   // for (let i = 0; i < childrenLength; i++) {
