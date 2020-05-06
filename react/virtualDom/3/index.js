@@ -79,31 +79,12 @@ function diffProps(newVDom, element) {
 }
 
 function diffChildren(newVDom, parent) {
-  const nodesWithKey = {};
-  let nodesWithKeyCount = 0;
-  const nodesWithoutKey = [];
-  const nodesWithoutKeyCount = 0;
-  const childNodes = parent.childNodes,
-    nodeLength = childNodes.length;
-  const vChildren = newVDom.children;
-  vLength = vChildren.length;
 
-  let min = 0;
+  const childrenLength = Math.max(parent.childNodes.length, newVDom.children.length)
 
-  for (let i = 0; i < nodeLength; i++) {
-    const child = childNodes[i],
-      props = child[ATTR_KEY];
-    if (props !== undefined && props.key !== undefined) {
-      nodesWithKey[props.key] = child;
-    } else {
-      nodesWithoutKey[nodesWithoutKeyCount++] = child
-    }
+  for (let i = 0; i < childrenLength; i++) {
+    diff(newVDom.children[i], parent, i)
   }
-  // const childrenLength = Math.max(parent.childNodes.length, newVDom.children.length)
-
-  // for (let i = 0; i < childrenLength; i++) {
-  //   diff(newVDom.children[i], parent, i)
-  // }
 }
 
 function isSameType(element, newVDom) {
