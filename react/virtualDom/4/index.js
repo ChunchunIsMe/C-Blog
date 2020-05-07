@@ -3,20 +3,24 @@ let state = { num: 5 };
 let timer;
 
 // 展示DOM
-
+const arr = [0, 1, 2, 3, 4];
 function view() {
+  const elm = arr.pop();
+  // 用于测试能不能正常删除元素
+  if (state.num !== 9) arr.unshift(elm);
+
+  // 用于测试能不能正常添加元素
+  if (state.num === 12) arr.push(9);
   return (
     <div>
       Hello World
-      <ul>
+            <ul myText="dickens">
         {
-          // 生成元素为0到n-1的数组
-          [...Array(state.num).keys()]
-            .map(i => (
-              <li id={i} class={`li-${i}`}>
-                第{i * state.num}
-              </li>
-            ))
+          arr.map(i => (
+            <li id={i} class={`li-${i}`} key={i}>
+              第{i}
+            </li>
+          ))
         }
       </ul>
     </div>
@@ -96,7 +100,7 @@ function diffChildren(newVDom, parent) {
       props = child[ATTR_KEY];
     if (props !== undefined && props.key !== undefined) {
       nodesWithKey[props.key] = child;
-      nodesWithKey++;
+      nodesWithKeyCount++;
     } else {
       nodesWithoutKey[nodesWithoutKeyCount++] = child
     }
@@ -108,7 +112,7 @@ function diffChildren(newVDom, parent) {
     let dom;
     const vKey = vProps !== undefined ? vProps.key : undefined;
     if (vKey !== undefined) {
-      if (nodesWithKeyCount && nodesWithKey[vkey] !== undefined) {
+      if (nodesWithKeyCount && nodesWithKey[vKey] !== undefined) {
         dom = nodesWithKey[vKey];
         delete nodesWithKey[vKey];
         nodesWithKeyCount--;
