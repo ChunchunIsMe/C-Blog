@@ -79,7 +79,13 @@ var MyComp = /*#__PURE__*/function (_Component) {
   _createClass(MyComp, [{
     key: "render",
     value: function render() {
-      return h("div", null, h("div", null, "This is My Component! ", this.props.count), h("div", null, "name: ", this.state.name));
+      var _this2 = this;
+
+      return h("div", null, h("div", null, "This is My Component! ", this.props.count), h("div", {
+        onClick: function onClick() {
+          console.log(_this2.state.name);
+        }
+      }, "name: ", this.state.name));
     }
   }]);
 
@@ -125,16 +131,6 @@ function h(tag, props) {
   };
 }
 
-function setProps(element, props) {
-  element[ATTR_KEY] = props;
-
-  for (var key in props) {
-    if (props.hasOwnProperty(key)) {
-      element.setAttribute(key, props[key]);
-    }
-  }
-}
-
 function createElement(vdom) {
   if (typeof vdom === 'string' || typeof vdom === 'number') {
     return document.createTextNode(vdom);
@@ -153,6 +149,26 @@ function createElement(vdom) {
 } // diff 算法
 
 
+function evtProxy(evt) {
+  this._eventListeners[evt.type](evt);
+}
+
+function setProps(element, props) {
+  element[ATTR_KEY] = props;
+
+  for (var key in props) {
+    if (props.hasOwnProperty(key)) {
+      if (key.slice(0, 2) === 'on') {
+        var event = key.slice(2).toLocaleLowerCase();
+        element.addEventListener(event, evtProxy);
+        (element._eventListeners || (element._eventListeners = {}))[event] = props[key];
+      } else {
+        element.setAttribute(key, props[key]);
+      }
+    }
+  }
+}
+
 function diffProps(newVDom, element) {
   var allProps = _objectSpread(_objectSpread({}, element[ATTR_KEY]), newVDom.props);
 
@@ -160,12 +176,24 @@ function diffProps(newVDom, element) {
     var oldValue = element[ATTR_KEY][key];
     var newValue = newVDom.props[key];
 
-    if (newValue === undefined) {
-      element.removeAttribute(key);
-      delete element[ATTR_KEY][key];
-    } else if (oldValue === undefined || oldValue !== newValue) {
-      element.setAttribute(key, newValue);
-      element[ATTR_KEY][key] = newValue;
+    if (key.slice(0, 2) === 'on') {
+      var event = key.slice(2);
+
+      if (newValue) {
+        element.addEventListener(event, evtProxy);
+      } else {
+        element.removeEventListener(event, evtProxy);
+      }
+
+      (element._eventListeners || (element._eventListeners = {}))[event] = newValue;
+    } else {
+      if (newValue === undefined) {
+        element.removeAttribute(key);
+        delete element[ATTR_KEY][key];
+      } else if (oldValue === undefined || oldValue !== newValue) {
+        element.setAttribute(key, newValue);
+        element[ATTR_KEY][key] = newValue;
+      }
     }
   });
 }

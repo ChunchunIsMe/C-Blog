@@ -30,7 +30,7 @@ class MyComp extends Component {
     return (
       <div>
         <div>This is My Component! {this.props.count}</div>
-        <div>name: {this.state.name}</div>
+        <div onClick={() => { console.log(this.state.name) }}>name: {this.state.name}</div>
       </div>
     )
   }
@@ -75,14 +75,7 @@ function h(tag, props, ...children) {
   }
 }
 
-function setProps(element, props) {
-  element[ATTR_KEY] = props;
-  for (const key in props) {
-    if (props.hasOwnProperty(key)) {
-      element.setAttribute(key, props[key]);
-    }
-  }
-}
+
 
 function createElement(vdom) {
   if (typeof vdom === 'string' || typeof vdom === 'number') {
@@ -102,18 +95,46 @@ function createElement(vdom) {
 }
 
 // diff 算法
+function evtProxy(evt) {
+  this._eventListeners[evt.type](evt);
+}
+
+function setProps(element, props) {
+  element[ATTR_KEY] = props;
+  for (const key in props) {
+    if (props.hasOwnProperty(key)) {
+      if (key.slice(0, 2) === 'on') {
+        const event = key.slice(2).toLocaleLowerCase();
+        element.addEventListener(event, evtProxy);
+        (element._eventListeners || (element._eventListeners = {}))[event] = props[key];
+      } else {
+        element.setAttribute(key, props[key]);
+      }
+    }
+  }
+}
 
 function diffProps(newVDom, element) {
   const allProps = { ...element[ATTR_KEY], ...newVDom.props };
   Object.keys(allProps).forEach(key => {
     const oldValue = element[ATTR_KEY][key];
     const newValue = newVDom.props[key];
-    if (newValue === undefined) {
-      element.removeAttribute(key);
-      delete element[ATTR_KEY][key];
-    } else if (oldValue === undefined || oldValue !== newValue) {
-      element.setAttribute(key, newValue)
-      element[ATTR_KEY][key] = newValue;
+    if (key.slice(0, 2) === 'on') {
+      const event = key.slice(2);
+      if (newValue) {
+        element.addEventListener(event, evtProxy);
+      } else {
+        element.removeEventListener(event, evtProxy);
+      }
+      (element._eventListeners || (element._eventListeners = {}))[event] = newValue;
+    } else {
+      if (newValue === undefined) {
+        element.removeAttribute(key);
+        delete element[ATTR_KEY][key];
+      } else if (oldValue === undefined || oldValue !== newValue) {
+        element.setAttribute(key, newValue);
+        element[ATTR_KEY][key] = newValue;
+      }
     }
   })
 
