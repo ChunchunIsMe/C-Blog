@@ -83,11 +83,11 @@ function diffChildren(newVDom, parent) {
   const nodesWithKey = {};
   let nodesWithKeyCount = 0;
   const nodesWithoutKey = [];
-  const nodesWithoutKeyCount = 0;
+  let nodesWithoutKeyCount = 0;
   const childNodes = parent.childNodes,
     nodeLength = childNodes.length;
-  const vChildren = newVDom.children;
-  vLength = vChildren.length;
+  const vChildren = newVDom.children,
+    vLength = vChildren.length;
 
   let min = 0;
 
@@ -96,6 +96,7 @@ function diffChildren(newVDom, parent) {
       props = child[ATTR_KEY];
     if (props !== undefined && props.key !== undefined) {
       nodesWithKey[props.key] = child;
+      nodesWithKey++;
     } else {
       nodesWithoutKey[nodesWithoutKeyCount++] = child
     }
@@ -128,8 +129,8 @@ function diffChildren(newVDom, parent) {
         }
       }
     }
-
     const isUpdate = diff(dom, vChild, parent);
+
     if (isUpdate) {
       const originChild = childNodes[i];
       if (originChild !== dom) {
@@ -137,7 +138,6 @@ function diffChildren(newVDom, parent) {
       }
     }
   }
-
   if (nodesWithKeyCount) {
     for (const key in nodesWithKey) {
       if (nodesWithKey.hasOwnProperty(key)) {
@@ -146,25 +146,12 @@ function diffChildren(newVDom, parent) {
       }
     }
   }
-
-  while (min < nodesWithoutKeyCount) {
-    const node = nodesWithoutKeyCount[nodesWithoutKeyCount--];
-    if(node!==undefined) {
+  while (min <= nodesWithoutKeyCount) {
+    const node = nodesWithoutKey[nodesWithoutKeyCount--];
+    if (node !== undefined) {
       node.parentNode.removeChild(node);
     }
   }
-
-  // if (nodesWithoutKeyCount) {
-  //   for (let i = 0; i < nodesWithoutKeyCount; i++) {
-  //     const element = nodesWithoutKey[i];
-  //     parent.removeChild(element);
-  //   }
-  // }
-  // const childrenLength = Math.max(parent.childNodes.length, newVDom.children.length)
-
-  // for (let i = 0; i < childrenLength; i++) {
-  //   diff(newVDom.children[i], parent, i)
-  // }
 }
 
 function isSameType(element, newVDom) {
@@ -173,7 +160,7 @@ function isSameType(element, newVDom) {
   if (
     elmType === Node.TEXT_NODE &&
     (vdomType === 'string' || vdomType === 'number') &&
-    element.nodeValue === newVDom
+    String(element.nodeValue) === String(newVDom)
   ) {
     return true;
   }
@@ -188,26 +175,25 @@ function isSameType(element, newVDom) {
   return false;
 }
 
-function diff(newVDom, parent, index = 0) {
-  const element = parent.childNodes[index];
+function diff(element, newVDom, parent) {
   if (element === undefined) {
     parent.appendChild(createElement(newVDom));
-    return;
+    return false;
   }
   if (newVDom === undefined) {
     parent.removeChild(element);
-    return;
+    return false;
   }
-
   if (!isSameType(element, newVDom)) {
     parent.replaceChild(createElement(newVDom), element);
-    return;
+    return false;
   }
 
   if (element.nodeType === Node.ELEMENT_NODE) {
     diffProps(newVDom, element);
     diffChildren(newVDom, element);
   }
+  return true;
 }
 
 function tick(element) {
@@ -216,7 +202,7 @@ function tick(element) {
     return;
   }
   const newVDom = view();
-  diff(newVDom, element);
+  diff(element.firstChild, newVDom, element);
 }
 
 function render(element) {
