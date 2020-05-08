@@ -91,10 +91,24 @@ function diffChild(dom, newVdom, parent) {
     childLength = children.length;
   const { children: newChildren } = newVdom;
   const newChildLength = newChildren.length;
-  const vLength = Math.max(childLength, newChildLength);
-  for (let i = 0; i < vLength; i++) {
-    diff(children[i], newChildren[i], parent);
+  // const vLength = Math.max(childLength, newChildLength);
+  const withKey = {}, withOutKey = [];
+  let withKeyCount = 0, withOutKeyCount = 0;
+  for (let i = 0; i < newChildLength; i++) {
+    const element = newChildren[i];
+    const eleKey = element.props.key;
+    if (eleKey === undefined) {
+      withOutKey[eleKey] = element;
+      withOutKeyCount++;
+    } else {
+      withKey.push(element);
+      withKeyCount++;
+    }
   }
+
+  // for (let i = 0; i < vLength; i++) {
+  //   diff(children[i], newChildren[i], parent);
+  // }
 }
 
 function diff(dom, newVdom, parent) {
