@@ -6,6 +6,9 @@
 
 1. [你不知道的VirtualDom](https://segmentfault.com/a/1190000016129036)
 
+所有代码都在[finaly](./finaly)中
+
+
 大佬好强,站在巨人的肩上看世界。
 ## 准备工作
 首先`npm init -y`初始化 npm 之后需要安装`babel`来转化jsx语法
