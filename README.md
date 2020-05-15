@@ -19,11 +19,12 @@
 
 ### 浏览器
   - [pwa](https://github.com/ChunchunIsMe/learningPWA)
+  - [V8GC](./browser/V8GC)
 
 ### react
-  - [redux源码](https://github.com/ChunchunIsMe/redux-source-code)
-  - [history源码](https://github.com/ChunchunIsMe/history-source-code)
-  - [react-router源码](https://github.com/ChunchunIsMe/react-router-source-code)
+  - [redux源码分析](https://github.com/ChunchunIsMe/redux-source-code)
+  - [history源码分析](https://github.com/ChunchunIsMe/history-source-code)
+  - [react-router源码分析](https://github.com/ChunchunIsMe/react-router-source-code)
   - [手写diff](./react/virtualDom)
 
 ### npm
