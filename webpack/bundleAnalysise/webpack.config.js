@@ -6,7 +6,7 @@ module.exports = {
     useTest: path.resolve(__dirname, 'useTest.js')
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'distSimple'),
     filename: '[name].js',
   },
   mode: 'development'
