@@ -11,7 +11,7 @@ class Node {
 
 class DoublyNode extends Node {
   constructor(element, next, prev) {
-    super(element,next,prev);
+    super(element, next, prev);
     this.next = next;
     this.prev = prev;
   }
@@ -120,5 +120,70 @@ class DoublyLinkedList extends LinkedList {
   constructor(equalsFn = defaultEquals) {
     super(equalsFn);
     this.tail = undefined;
+  }
+
+  push(element) {
+    const node = new DoublyNode(element);
+    if (this.head === undefined) {
+      this.head = node;
+    } else {
+      let current = this.head;
+      while (current.next) {
+        current = current.next;
+      }
+      current.next = node;
+      node.prev = current;
+    }
+    this.tail = node;
+    this.count++;
+    return true
+  }
+
+  insert(element, position) {
+    const node = new DoublyNode(element);
+    if (position === 0) {
+      if (this.head) {
+        this.head.prev = node;
+        node.prev = this.head;
+      }
+      this.head = node;
+    } else if (position === this.count - 1) {
+      this.tail.next = node;
+      node.prev = this.tail;
+      this.tail = node;
+    } else {
+      const prev = super.getElementAt(position - 1);
+      const next = prev.next;
+      prev.next = node;
+      node.prev = prev;
+      node.next = next;
+      next.prev = node;
+    }
+    this.count++;
+    return true;
+  }
+
+  removeAt(index) {
+    if (index > 0 && index < this.count) {
+      if (index === 0) {
+        this.head = this.head.next;
+        this.head.prev = undefined;
+      } else if (index === this.count - 1) {
+        this.tail = this.tail.prev;
+        this.tail.next = undefined;
+      } else {
+        const previous = this.getElementAt(index - 1);
+        previous.next.next.prev = previous;
+        previous.next = previous.next.next;
+      }
+      this.count--;
+      return true;
+    }
+    return false;
+  }
+
+  remove(element) {
+    const index = super.indexOf(element);
+    return this.removeAt(index);
   }
 }
