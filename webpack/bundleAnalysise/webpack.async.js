@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -8,5 +9,8 @@ module.exports = {
     path: path.resolve(__dirname, 'distAsync'),
     filename: '[name].js',
   },
-  mode: 'development'
+  mode: 'development',
+  plugins: [
+    new HtmlWebpackPlugin()
+  ]
 }

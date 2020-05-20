@@ -291,6 +291,123 @@ function checkDeferredModules() {
 结论: 其实简单的拆包就是将包的代码挂在了window对象下,然后将该代码放在入口文件自调用函数的参数中
 ### 按需加载分析
 #### 起步
+因为`webpack`的按需加载是使用`import()`来实现的,所以我们不能再用`useTest.js`了,我们新建一个`asyncUseTest.js`并且安装`html-webpack-plugin`来分析.运行`npm i html-webpack-plugin -D`
+```
+// asyncUseTest.js
+import('./test').then(res => {
+  console.log(res);
+})
+```
+再新建一个webpack.async.js
+```
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+module.exports = {
+  entry: {
+    index: path.resolve(__dirname, 'asyncUseTest.js'),
+  },
+  output: {
+    path: path.resolve(__dirname, 'distAsync'),
+    filename: '[name].js',
+  },
+  mode: 'development',
+  plugins: [
+    new HtmlWebpackPlugin()
+  ]
+}
+```
+运行`npx webpack --config=webpack.async.js`就可以看到产物了。
 #### 分析
+我们首先可以看到生成的html中只有`index.js`的`script`却没有另一个`js`这就很奇怪了。我们来看看打包后的`index.js`到底是怎么操作的。
+```
+(function (modules) { // webpackBootstrap
+  // ...
+  return __webpack_require__(__webpack_require__.s = "./asyncUseTest.js");
+})
+  ({
+    "./asyncUseTest.js":
+      /*!*************************!*\
+        !*** ./asyncUseTest.js ***!
+        \*************************/
+      /*! no static exports found */
+      (function (module, exports, __webpack_require__) {
+        eval("__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./test */ \"./test.js\")).then(res => {\n  console.log(res);\n})\n\n//# sourceURL=webpack:///./asyncUseTest.js?");
+      })
+  });
+```
+可以发现代码中其他东西都和拆包的代码差不多,有些不同的就是最后并没有调用`checkDeferredModules`而是调用了`__webpack_require__`这两个函数我们都分析过,就不再做分析,我们主要看看`webpack`是怎么进行按需加载的。使用`import()`和之前唯一的区别就是用了`__webpack_require__.e`,我们来看看这个函数做了什么
+```
+__webpack_require__.e = function requireEnsure(chunkId) {
+  var promises = [];
+  // 在 installedChunks 对象中寻找文件
+
+  var installedChunkData = installedChunks[chunkId];
+  // 如果key = 文件名 的 value 的值为 0 则代表已经被装载
+  if (installedChunkData !== 0) {
+
+    // a Promise means "currently loading".
+    // 如果key = 文件名 的 value 的值不为 0 且存在, 说明文件在装载中这个状态
+    if (installedChunkData) {
+      promises.push(installedChunkData[2]);
+    } else {
+      // setup Promise in chunk cache
+      // 从没有操作过的文件使用 promise 将 promise 函数中的 [resolve,reject]赋值给installedChunks[chunkId]和installedChunkData
+      var promise = new Promise(function (resolve, reject) {
+        installedChunkData = installedChunks[chunkId] = [resolve, reject];
+      });
+      // 将 promise 加入到 promises 中并且赋值给 installedChunkData[2]
+      promises.push(installedChunkData[2] = promise);
+
+      // 创建 script 标签
+      var script = document.createElement('script');
+      var onScriptComplete;
+
+      // 设置字符串编码格式
+      script.charset = 'utf-8';
+      script.timeout = 120;
+      if (__webpack_require__.nc) {
+        script.setAttribute("nonce", __webpack_require__.nc);
+      }
+      // 将文件路径赋值给 src
+      script.src = jsonpScriptSrc(chunkId);
+
+      // 写script 加载完成/加载错误/加载超时处理函数
+      var error = new Error();
+      onScriptComplete = function (event) {
+        // avoid mem leaks in IE.
+        script.onerror = script.onload = null;
+        clearTimeout(timeout);
+        var chunk = installedChunks[chunkId];
+        if (chunk !== 0) {
+          if (chunk) {
+            var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+            var realSrc = event && event.target && event.target.src;
+            error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+            error.name = 'ChunkLoadError';
+            error.type = errorType;
+            error.request = realSrc;
+            chunk[1](error);
+          }
+          installedChunks[chunkId] = undefined;
+        }
+      };
+      // 如果 2 分钟还没有加载成功就报超时
+      var timeout = setTimeout(function () {
+        onScriptComplete({ type: 'timeout', target: script });
+      }, 120000);
+      // 如果报错或者加载成功调用处理函数
+      script.onerror = script.onload = onScriptComplete;
+      // 将该script标签增加到html中
+      document.head.appendChild(script);
+    }
+  }
+  // 返回一个promise.all 只有当参数数组中所有promise都变成fullfilling它返回的Promise才会变成fullfilling
+  return Promise.all(promises);
+};
+```
+其实按需加载的原理就是暂时不加script标签引入,当用到的时候再调用`__webpack_require__.e`往文档加script动态引入该文件。
 ### 总结
+- 简单打包: 将文件整合成一个对象,需要时通过文件名拿到对象下方法,进行调用。
+- 简单拆包: 将拆包后的文件整合成对象挂载在window对象下,调用主入口函数时,将其整合在入口函数的对象下,入口函数需要拆包文件导出值时,使用`__webpack_require__`获取
+- 按需加载拆包: 和简单拆包一样将文件整合成对象挂载在window对象下, 调用主入口函数时,先在文档增加script标签将需要导入的文件通过标签引入,然后和简单拆包一样操作
