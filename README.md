@@ -33,7 +33,7 @@
 
 ### webpack
   - [webpack基础学习](https://github.com/ChunchunIsMe/studyWebpack)
-  - [webpack产物分析-从简单产物到按需加载](./webpack/bundleAnalysise)
+  - [webpack产物分析-从简单产物到按需加载实践](./webpack/bundleAnalysise)
   - [webpack实践-一个react项目小架子](https://github.com/ChunchunIsMe/react-web)
   - [library的打包](./webpack/library)
 

@@ -413,3 +413,43 @@ __webpack_require__.e = function requireEnsure(chunkId) {
 - 按需加载拆包: 和简单拆包一样将文件整合成对象挂载在window对象下, 调用主入口函数时,先在文档增加script标签将需要导入的文件通过标签引入,然后和简单拆包一样操作
 
 > 注意: 使用`html-webpack-plugin`是简单拆包和按需加载拆包是有区别的,简单拆包的会直接生成`script`在生成的`html`中而按需加载拆分的包不会出现
+
+### 拆包优化实践
+在 React 中最常用的拆包优化就是`react-router`的拆包优化,将每个`Route`需要的`component`设置成高阶组件的返回值,高阶组件的参数是`() => import(*.js)`,在高阶组件返回的组件挂载之后再将`import()`中的组件按需加载出来,下面是代码实现
+```
+function asyncImport(importComponent) {
+  class AsyncComponent extend React.Component {
+    constructor(props) {
+      super(props);
+      this.state ={ Component: null }
+    }
+
+    componentDidMount() {
+      // 这里还可以做一些页面加载loading
+      importComponent().then(Compnent => {
+        this.setState({
+          Component
+        })
+      })
+    }
+
+    render() {
+      const { Component } = this.state;
+      return (
+        <>
+          {
+            Component ? <Component {...this.props} />: null
+          }
+        </>
+      )
+    }
+  }
+}
+```
+而在`Router`配置中可以
+```
+<Switch>
+  <Route path="**" component={asyncImport(() => import('*/*.js'))}/>
+</Switch>
+```
+配合`webpack`就实现了页面的按需加载
