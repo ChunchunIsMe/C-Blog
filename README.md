@@ -36,7 +36,7 @@
   - [webpack产物分析-从简单产物到按需加载实践](./webpack/bundleAnalysise)
   - [webpack实践-一个react项目小架子](https://github.com/ChunchunIsMe/react-web)
   - [library的打包](./webpack/library)
-
+  - [webpack插件集合](./webpack/plugin)
 ### 网络
   - [tcp](./webServer/tcp)
   - [udp](./webServer/udp)
