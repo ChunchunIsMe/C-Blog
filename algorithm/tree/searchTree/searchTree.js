@@ -1,18 +1,59 @@
-function searchTree(head, value) {
+function addSearchTreeNode(head, value) {
   if (head === undefined) {
     return { value, left: undefined, right: undefined }
   }
   if (head.value > value) {
     if (head.left) {
-      searchTree(head.left, value)
+      addSearchTreeNode(head.left, value)
     } else {
       head.left = { value, left: undefined, right: undefined }
     }
   } else {
     if (head.right) {
-      searchTree(head.right, value)
+      addSearchTreeNode(head.right, value)
     } else {
       head.right = { value, left: undefined, right: undefined }
+    }
+  }
+}
+
+function RemoveSearchTreeNode(head, value) {
+  let current = head;
+  let father = null;
+  let type = ''
+  while (current != undefined && current.value !== value) {
+    if (current.value > value) {
+      current = current.left
+      father = current;
+      type = 'left'
+    } else if (current.value < value) {
+      current = current.right;
+      father = current;
+      type = 'right'
+    } else {
+      break;
+    }
+  }
+
+
+  if (current !== head && current.left == undefined) {
+    father[size] = current.right;
+  } else if (current !== head && current.right == undefined) {
+    father[size] = current.left;
+  } else {
+    let child = current.right;
+    let parent = current;
+
+    while (child.left != undefined) {
+      parent = child;
+      child = child.left;
+    }
+    if (parent === current) {
+      current.value = child.value;
+      current.right = current.right.right;
+    } else {
+      current.value = child.value;
+      parent.left = undefined;
     }
   }
 }

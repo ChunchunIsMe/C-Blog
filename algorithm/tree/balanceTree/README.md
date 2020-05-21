@@ -16,9 +16,39 @@
 
 1. 单右旋平衡处理
 ![左左型](./pic/ll.webp)
+
+```
+// 找到左子树第一个平衡因子为1的节点的父节点 node 然后进行旋转
+function rotationRR(node) {
+  const tmp = node.left;
+  node.left = tmp.right;
+  tmp.right = node;
+  return tmp;
+}
+
+```
 2. 单左旋平衡处理
 ![右右型](./pic/rr.webp)
-代码的实现
+```
+// 和左左型相反
+function rotationLL(node) {
+  const tmp = node.right;
+  node.right = tmp.left;
+  tmp.left = node;
+  return tmp;
+}
+```
 3. 右左平衡处理
-
+```
+// 头节点平衡因子为-2, 找到右子树的平衡因子节点为 1 那么需要对该节点进行右旋，然后对该节点的父节点进行左旋
+function rotationRL(node) {
+  const tmp = rotationRR(node.right);
+  node.right = tmp;
+  const result = rotationLL(node);
+  return result;
+}
+```
 4. 左右平衡处理
+```
+// 和右左相反
+```
