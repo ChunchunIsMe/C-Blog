@@ -1,4 +1,4 @@
 - [判断链表中是否有环](./checkCircle)
 - [判断链表中环的起点](./checkCircleStart)
-- [判断链表中环的中点](./checkCircleMid)
+- [判断链表中的中点](./checkCircleMid)
 - [判断链表倒数第n个元素](./checkLastEle)
