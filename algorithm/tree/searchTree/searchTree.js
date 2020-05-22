@@ -15,6 +15,7 @@ function addSearchTreeNode(head, value) {
       head.right = { value, left: undefined, right: undefined }
     }
   }
+  return head;
 }
 
 function RemoveSearchTreeNode(head, value) {
@@ -37,9 +38,9 @@ function RemoveSearchTreeNode(head, value) {
 
 
   if (current !== head && current.left == undefined) {
-    father[size] = current.right;
+    father[type] = current.right;
   } else if (current !== head && current.right == undefined) {
-    father[size] = current.left;
+    father[type] = current.left;
   } else {
     let child = current.right;
     let parent = current;
@@ -56,4 +57,11 @@ function RemoveSearchTreeNode(head, value) {
       parent.left = undefined;
     }
   }
+
+  return head;
+}
+
+module.exports = {
+  addSearchTreeNode,
+  RemoveSearchTreeNode
 }

@@ -6,12 +6,12 @@
 
 
 ### 算法
-  - [栈](./algorithm/stack)
-  - [队列](./algorithm/queue)
-  - [树](./algorithm/tree)
   - [字符串](./algorithm/str)
   - [数组](./algorithm/array)
-
+  - [栈](./algorithm/stack)
+  - [队列](./algorithm/queue)
+  - [链表](./algorithm/linkedList)
+  - [树](./algorithm/tree)
 ### JavaScript
   - [纯前端mock](https://github.com/ChunchunIsMe/ObjectDefineMock)
 
