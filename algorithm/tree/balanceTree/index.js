@@ -36,6 +36,9 @@ function getHeight(node) {
 }
 
 function getBalance(node) {
+  if (node == undefined) {
+    return 0;
+  }
   return getHeight(node.left) - getHeight(node.right);
 }
 
@@ -46,29 +49,30 @@ function balanceTree(node, father = null) {
     if (fatherBalance < -1) {
       father.right = RL(node)
     } else {
-      balance(node.left, node);
+      node = balanceTree(node.left, node);
     }
   } else if (balance < -1) {
     if (fatherBalance > 1) {
       father.left = LR(node);
     } else {
-      balance(node.right, node);
+      node = balanceTree(node.right, node);
     }
   } else {
     if (father === null) {
-      return;
+      return node;
     } else {
-      if (balance > 0 && fatherBalance > 0) {
-        father.left = RR(node)
-      } else if (balance < 0 && fatherBalance < 0) {
-        father.right = LL(node);
+      if (balance > 0 && fatherBalance > 1) {
+        return RR(node)
+      } else if (balance < 0 && fatherBalance < -1) {
+        return LL(node);
       } else if (balance > 0 && fatherBalance < 0) {
-        father.right = RL(node)
+        return RL(node)
       } else if (balance < 0 && fatherBalance > 0) {
-        father.left = LR(node);
+        return LR(node);
       }
     }
   }
+  return node;
 }
 
 function addBalanceNode(head, value) {
@@ -82,4 +86,16 @@ function removeBalanceNode(head, value) {
   head = balanceTree(head);
   return head;
 }
+
+const a = addBalanceNode(undefined, 1)
+addBalanceNode(a, 2)
+addBalanceNode(a, 3)
+addBalanceNode(a, 4)
+addBalanceNode(a, 5)
+addBalanceNode(a, 6)
+addBalanceNode(a, 7)
+addBalanceNode(a, 8)
+addBalanceNode(a, 9)
+addBalanceNode(a, 10)
+console.log(a);
 
