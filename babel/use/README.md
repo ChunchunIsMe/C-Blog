@@ -85,3 +85,13 @@ module.exports = () => {
 ```
 它其实就是一个到处的函数然后将`babel`配置导出, 然后`babel`将使用这个配置进行转义。`preset`还支持绝对路径或者相对路径来使用你写的`preset`
 ### 官方Preset
+1. @babel/preset-env 这个预设可以让你直接使用最后版本的JavaScript
+2. @babel/preset-flow 类型检测插件
+3. @babel/preset-react react语法插件
+4. @babel/preset-typescirpt 转换typescript语法
+5. @babel/preset-stage-x 一些未纳入JavaScript标准的提案,这些提案可能随时改变,特别是 stage-3之前的任何提案。
+  - stage-0 一个设想,可能有babel插件
+  - stage-1 值得跟进的建议
+  - stage-2 初始规范草案
+  - stage-3 候选规范,完成规范并且在浏览器初步实现
+  - stage-4 将添加到下一个年度发布版本中
