@@ -1,3 +1,4 @@
 - [树的前中后序遍历](./twoTree.js)
 - [二插搜索树](./searchTree)
-- [平衡二插搜索树](./balanceTree)
+- [平衡二插搜索树(未完成)](./balanceTree)
+- [二叉堆和堆排序](./heap)
