@@ -1,0 +1,19 @@
+{
+  "name": "use",
+  "version": "1.0.0",
+  "description": "### babel是什么 官方解释: babel是一个 JavaScript 编译器. 就像很多编译器一样它会经过三步: parsing(解析), transforming(转换), printing(生成)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.8.7"
+  }
+}

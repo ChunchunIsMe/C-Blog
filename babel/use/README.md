@@ -107,3 +107,13 @@ module.exports = () => {
 9. @babel/types 工具类, 主要用来在创建AST时判断各种语法类型
 
 在 [webpack打包原理](../../webpack/bundlePrincipe)中有对上述工具的使用
+
+### runtime
+当进行编译的时候在文件的头部总会出现一些工具方法,你会发现很多文件头部的工具方法都是一样的,这个时候我们就可以使用runtime来复用辅助函数
+
+首先要安装包
+```
+npm i @babel/runtime -S
+npm i @babel/plugin-transform-runtime -D
+```
+然后再`plugins`中加入这个插件就可以实现复用了
