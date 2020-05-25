@@ -95,3 +95,15 @@ module.exports = () => {
   - stage-2 初始规范草案
   - stage-3 候选规范,完成规范并且在浏览器初步实现
   - stage-4 将添加到下一个年度发布版本中
+### Toolings
+1. @babel/parser 将源代码解析成AST
+2. @babel/core 包括了整个babel工作流,也就是说在 @babel/core 中会使用到 @babel/parser、transformer[s]、@babel/generator
+3. @babel/generator 将AST源码解析生成 js 代码
+4. @babel/code-frame 用于生成错误信息并且打印出错误原因和错误行数。(其实就是个 console 工具类)
+5. @babel/helpers 也是工具类, 提供一些内置的函数实现, 主要用于babel插件的开发
+6. @babel/runtime 也是工具类, 为了babel编译时提供一些基础的工具库。作用于transformer[s]阶段,当然这是一个工具类,如果要使用这个工具库。还要引入@babel/plugin-tranform-runtime
+7. @babel/template 工具类, 为parser提供模板引擎, 更加快速的转化成 AST
+8. @babel/traverse 工具类, 用来遍历AST树,可以得到文件依赖 也在@babel/generator过程中生效。
+9. @babel/types 工具类, 主要用来在创建AST时判断各种语法类型
+
+在 [webpack打包原理](../../webpack/bundlePrincipe)中有对上述工具的使用
