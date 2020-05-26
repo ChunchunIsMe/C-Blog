@@ -50,7 +50,7 @@ class Graph {
     let s = '';
     for (let i = 0; i < this.vertices.length; i++) {
       const element = this.vertices[i];
-      s+= `${element} -> ${this.adjList.get(element).join(' ')}\n`
+      s += `${element} -> ${this.adjList.get(element).join(' ')}\n`
     }
     return s;
   }
@@ -75,5 +75,5 @@ graph.addEdge('e', 'i');
 
 console.log(graph.toString());
 
-module.exports = graph;
+module.exports = { graph, Graph };
 
