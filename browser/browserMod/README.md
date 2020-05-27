@@ -182,3 +182,21 @@ console.log(2)
 这里会先打印1后打印2
 
 ![task](./pic/task.webp)
+
+### 使用MutationObserver实现microtask
+
+MutationObserver可以用来实现microtask(虽然它属于microtask,但是它的优先级略小于Promise,一般是promise不支持才会使用MutationObserver)
+
+是一个H5的新特性,作用是监听一个DOM的的变动,当DOM发生变动后,MutationObserver就会得到通知
+```
+let context = 1;
+const nextTickHander = () => {console.log(123)};
+const observer = new MutationObserver(nextTickHander)
+const dom = document.createTextNode(String(context));
+observer.observe(dom, { characterData: true });
+const timeFun = () => {
+  context = (context+1)%2;
+  dom.data = String(context)
+}
+```
+// 每次调用timeFun都会向微任务队列汇总
