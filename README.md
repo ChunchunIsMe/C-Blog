@@ -36,7 +36,7 @@
   - [pwa](https://github.com/ChunchunIsMe/learningPWA)
   - [V8GC](./browser/V8GC)
   - [浏览器的进程与线程模型](./browser/browserMod)
-  - [浏览器缓存](./borwser/cache)
+  - [浏览器缓存](./browser/cache)
   - [浏览器跨页面通信](./browser/tagMessage)
   - [跨域总结(建设中)]()
 ### react
