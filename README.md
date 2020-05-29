@@ -37,7 +37,7 @@
   - [V8GC](./browser/V8GC)
   - [浏览器的进程与线程模型](./browser/browserMod)
   - [浏览器缓存](./browser/cache)
-  - [浏览器跨页面通信](./browser/tagMessage)
+  - [浏览器跨页面通信](./browser/tabMessage)
   - [跨域总结(建设中)]()
 ### react
   - [react知识整理](https://github.com/ChunchunIsMe/learningReact)
@@ -47,7 +47,7 @@
   - [手写diff](./react/virtualDom)
   - [fiber架构(建设中)]()
 ### npm/yarn
-  - [npm用法和介绍](../npm/introduction)
+  - [npm用法和介绍](./npm/introduction)
 
 ### webpack
   - [webpack基础学习](https://github.com/ChunchunIsMe/studyWebpack)
@@ -73,5 +73,5 @@
 ### babel
   - [babel简单使用](./babel/use)
 ### 梳理和知识串联
-  - [从输入URL到页面加载的过程-知识梳理]()
+  - [从输入URL到页面加载的过程-知识梳理(建设中)]()
 ### git
