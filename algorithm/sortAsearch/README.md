@@ -1,0 +1,4 @@
+- [冒泡排序](./bubble.js)
+- [选择排序](./select.js)
+- [插入排序](./insert.js)
+- [快速排序](./fast.js)

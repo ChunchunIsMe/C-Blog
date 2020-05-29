@@ -14,13 +14,14 @@
   - [字典](./algorithm/map/index.js)
   - [树](./algorithm/tree)
   - [图](./algorithm/graph)
-  - [排序(建设中)]()
+  - [排序和搜索](./algorithm/sortAsearch)
   - [算法思想(建设中)]()
   - [复杂度计算(建设中)]()
 ### JavaScript
   - [JS基础(建设中)]()
   - [ES6(建设中)]()
   - [JS方法实现(建设中)]()
+  - [用浏览器展示WeakSet/WeakMap]()
   - [纯前端mock](https://github.com/ChunchunIsMe/ObjectDefineMock)
 
 ### node
@@ -35,9 +36,8 @@
   - [pwa](https://github.com/ChunchunIsMe/learningPWA)
   - [V8GC](./browser/V8GC)
   - [浏览器的进程与线程模型](./browser/browserMod)
-  - [浏览器缓存(建设中)]()
+  - [浏览器缓存](./borwser/cache)
   - [浏览器跨页面通信](./browser/tagMessage)
-  - [EventLoop(建设中)]()
   - [跨域总结(建设中)]()
 ### react
   - [react知识整理](https://github.com/ChunchunIsMe/learningReact)
@@ -58,7 +58,7 @@
   - [webpack插件集合](./webpack/plugin)
 ### 网络
   - [网络七层协议/五层协议/四层协议](./webServer/OSI)
-  - [tcp(建设中)](./webServer/tcp)
+  - [tcp](./webServer/tcp)
   - [udp](./webServer/udp)
   - [ip(建设中)](./webServer/ip)
   - [http(建设中)](./webServer/http)
