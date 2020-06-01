@@ -21,7 +21,7 @@
   - [JS基础(建设中)]()
   - [ES6(建设中)]()
   - [JS方法实现(建设中)]()
-  - [用浏览器展示WeakSet/WeakMap]()
+  - [用浏览器展示WeakSet/WeakMap](./JavaScript/Weak)
   - [纯前端mock](https://github.com/ChunchunIsMe/ObjectDefineMock)
 
 ### node
