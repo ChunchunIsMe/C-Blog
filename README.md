@@ -30,7 +30,6 @@
   - [简单实现koa](./node/easyKoa/index.js)
   - [mock中间件](https://github.com/ChunchunIsMe/ServerMock)
   - [EventLoop(建设中)]()
-  - [对比express和koa(建设中)]()
 
 ### 浏览器
   - [pwa](https://github.com/ChunchunIsMe/learningPWA)
