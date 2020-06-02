@@ -15,7 +15,7 @@
   - [树](./algorithm/tree)
   - [图](./algorithm/graph)
   - [排序和搜索](./algorithm/sortAsearch)
-  - [算法思想(建设中)]()
+  - [算法设计与技巧](./algorithm/think)
   - [复杂度计算(建设中)]()
 ### JavaScript
   - [JS基础(建设中)]()
