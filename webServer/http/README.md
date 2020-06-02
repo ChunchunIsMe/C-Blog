@@ -57,5 +57,53 @@ SPDY协议在谷歌浏览器上证明可行之后,就被当做了HTTP/2的基础
 - 当前主流浏览器只支持基于https部署的http2
 
 新特性
-- 二进制传输: 采用二进制传输而非http1.x的文本格式,二进制协议解析起来更高效。HTTP/1的请求和响应报文,都是由起始报文,首部和实体正文组成,各部分由文本换行符分割。HTTP2将请求和响应数据分割为更小的帧,并且它们采用二进制编码。
+- 二进制分帧: 采用二进制传输而非http1.x的文本格式,二进制协议解析起来更高效。HTTP/1的请求和响应报文,都是由起始报文,首部和实体正文组成,各部分由文本换行符分割。HTTP2将请求和响应数据分割为更小的帧,并且它们采用二进制编码。
+![二进制分帧](./pic/2code.webp)
 - 多路复用: 多路复用很好的解决了浏览器限制同一个域名下请求数量的问题,通知也接更容易实现全速传输,毕竟每次三次握手之后都要慢开始
+   - 一个域名对应一个连接
+   - 一个流代表了一个完整的请求响应过程
+   - 帧是最小的数据单位,每个帧会标识出该帧属于哪个流,流也就是多个帧组成的数据流。
+   - 多路复用就是在一个TCP连接中可以存在多个流
+![多路复用](./pic/multiplex.webp)
+- 头部压缩: 因为在http1.x中每次文本传输头部都需要重复传几百到上千个字节,很浪费资源,所以http2采用了头部压缩策略
+   - http/2在客户端和服务端使用'首部表'来跟踪和储存之前发送的键值对,对于相同的数据,不再通过每次请求和响应发送
+   - 首部表在HTTP/2的连接存续期内始终存在,由客户端和服务器共同渐进地更新
+   - 每个新的首部键-值对要么被追加到当前表的末尾,要么替换表之前的值
+![同步压缩](./pic/headzip.png)
+- 服务器推送(Server Push): 服务器能通过 push 的方式将客户端需要的内容预先推送过去, 也叫"cache push".比如请求html时,先把js/css推送过去缓存,当html加载css/js时就不用去请求而是直接使用缓存,服务端可以主动推送,客户端也有权利选择是否接收。如果服务端推送的资源已经被浏览器缓存过,浏览器可以发RST_STREAM帧来拒收。主动推送也遵守同源策略。
+![服务器推送](./pic/headzip.png)
+### http2和http1.x的区别
+1. 二进制分帧: http1.x是基于文本分割的协议,http/2是基于二进制帧的协议。
+2. 多路复用: 为什么HTTP1.x不能实现多路复用呢,原因也是因为http2进行了二进制分帧。http1.x是根据发送消息的换行分割符来判断每一条key:value
+   - 所以http1.x一次只能处理一个请求或响应,因为这种以分割符分割消息的数据,在完成之前不能停止解析
+   - http1.x解析这种数据无法预知需要多少内存,这会给"服务端"很大的压力,因为它不知道要把一行要解析的数据读到多大的缓冲区中,在保证解析效率和速度的前提下内存该如何分配
+   - http2二进制分帧实现了一个目的:一切可预知,一切可控,因为帧是一个数据单元实现了对消息的封装。所以可以实现多路复用疯狂发帧就行了
+
+http1.x文本
+```
+GET / HTTP/1.1
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding:gzip, deflate, br
+Accept-Language:zh-CN,zh;q=0.9,en;q=0.8
+Cache-Control:max-age=0
+Connection:keep-alive
+Cookie:imooc_uuid=b2076a1d-6a14-4cd5-91b0-17a9a2461cf4; imooc_isnew_ct=1517447702; imooc_isnew=2; zg_did=%7B%22did%22%3A%20%221662d799f3f17d-0afe8166871b85-454c092b-100200-1662d799f4015b%22%7D; loginstate=1; apsid=Y4ZmEwNGY3OTUwMTdjZTk0ZTc4YzBmYThmMDBmZDYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANDEwNzI4OQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5NTMzNjIzNjVAcXEuY29tAAAAAAAAAAAAAAAAAAAAADBmNmM5MzczZTVjMTk3Y2VhMDE2ZjUxNmQ0NDUwY2IxIDPdWyAz3Vs%3DYj; Hm_lvt_fb538fdd5bd62072b6a984ddbc658a16=1541222935,1541224845; Hm_lvt_f0cfcccd7b1393990c78efdeebff3968=1540010199,1541222930,1541234759; zg_f375fe2f71e542a4b890d9a620f9fb32=%7B%22sid%22%3A%201541297212384%2C%22updated%22%3A%201541297753524%2C%22info%22%3A%201541222929083%2C%22superProperty%22%3A%20%22%7B%5C%22%E5%BA%94%E7%94%A8%E5%90%8D%E7%A7%B0%5C%22%3A%20%5C%22%E6%85%95%E8%AF%BE%E7%BD%91%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1%5C%22%2C%5C%22%E5%B9%B3%E5%8F%B0%5C%22%3A%20%5C%22web%5C%22%7D%22%2C%22platform%22%3A%20%22%7B%7D%22%2C%22utm%22%3A%20%22%7B%7D%22%2C%22referrerDomain%22%3A%20%22%22%2C%22cuid%22%3A%20%22Jph3DQ809OQ%2C%22%7D; PHPSESSID=h5jn68k1fcaadn61bpoqa9hch2; cvde=5be7a057c314b-1; IMCDNS=1
+Host:www.imooc.com
+Referer:https://www.imooc.com/
+Upgrade-Insecure-Requests:1
+User-Agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36
+```
+http2.0帧结构
+
+![二进制分帧](./pic/2codehead.webp)
+### http3.0简介
+虽然HTTP/2解决了很多旧版本的问题,但是还是存在巨大问题,那就是主要是底层是TCP。
+- 虽然有了多路复用,一般来说一个域名只要一个TCP连接。但是如果连接中出现了丢包的情况,那整个TCP都要等待重传,也导致了后面所有数据都会被阻塞。
+- 因为TCP存在时间太长用的人太多,不太好修改,所以Google弄了一个基于UDP协议的QUIC协议,并且使用在了HTTP/3上
+- 并且QUIC安全层同样适用TLS1.3协议
+### http3.0新功能
+- 改进的拥塞控制、可靠传输:
+- 快速握手
+- 集成了 TLS1.3 加密
+- 多路复用
+- 连接迁移
