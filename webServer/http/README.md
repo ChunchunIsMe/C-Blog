@@ -21,6 +21,8 @@ HTTP协议是 HyperText Transfer Protocol(超文本传输协议)的缩写, 它�
   - Post相对于Get安全一点,因为Get请求都包含在URL中,并且会被浏览器保存历史记录。Post不会
   - 浏览器URL有长度限制,会影响GET传参
   - Post有更多的编码格式且不对数据类型限制
+  - GET请求,浏览器会直接把 http header 和 data 一起发送出去,服务器返回200(返回数据)
+  - POST请求,浏览器先发送header,服务器响应100 continue, 浏览器再发送data,服务器响应 200(返回数据)
 ### http1.0/1.1 的区别
 - 缓存处理: 在HTTP1.0中主要使用header中的 If-Modified-Since 和 Expires来作为缓存的标准,HTTP1.1引入了If-None-Math、ETag等更多可供选择的缓存头来控制缓存策略
 - 带宽优化和网络连接的使用: HTTP1.1请求头中引入了range头域,允许之请求资源的某个部分,状态码返回206
