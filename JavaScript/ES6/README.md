@@ -78,14 +78,118 @@ const {val:c=2,doc:d:3} = obj;
 - Object.fromEntries();
 ## Symbol
 - 新增数据类型且唯一
-## Set/Map
-
+- 使用`let a = Symbol()`创建,前面不能带new
+- description: 创建Symbol的时候可以添加一个描述,用这个属性可以获取。`const a = Symbol('foo');a.description`
+- 如果使用Symbol值作为属性名: `for...in`、`for...of`、`Object.keys()`、`Object.getOwnPropertyNames()`、`JSON.stringify()`都不会返回Symbol属性名。只有使用`Object.getOwnPropertySymbols()`可以获取指定对象的所有Symbol属性名,方法返回一个数组。还有一个`Reflect.ownKeys()`返回所有类型的键名,包括常规和Symbol
+- Symbol.for(): 如果想要使用相同的Symbol可以使用Symbol.for()输入相同的参数生成`Symbol.for('foo')===Symbol.for('foo')`
+- Symbol.keyFor(): 用来返回传入Symbol的key这个key是使用Symbol.for()注册的key
+```
+const a = Symbol.for('foo');const b = Symbol('foo')
+Symbol.keyFor(a) // foo
+Symbol.keyFor(b) // undefined
+```
+## 内置的Symbol属性
+1. Symbol.hasInstance: 对象的内部方法。比如使用`foo instanceof Foo`其实是调用`Foo[Symbol.hanInstance](foo)`
+```
+const obj = {
+  [Symbol.hasInstance](foo) {
+    return Array.isArray(foo)
+  }
+}
+[] instanceof obj // true
+```
+2. Symbol.isConcatSpreadable: 一个布尔值,代表使用Array.prototype时是否可以展开
+```
+let arr1 = [2,3,4];
+[1].concat(arr1,5); // [1,2,3,4,5]
+let arr2 = [2,3,4];
+arr2[Symbol.isConcatSpreadable] = false;
+[1].concat(arr2,5); // [1,[2,3,4],5]
+```
+3. Symbol.species: 
+4. Symbol.match: 使用match的时候会调用它
+```
+str.match(regexp);
+// 相当于
+regexp[Symbol.match](str)
+```
+5. Symbol.replace: 如果想要替换掉这个字符串,那么将会调用这个函数
+```
+str.replace(a,b);
+// 相当于
+a[Symbol.replace](str,b);
+```
+6. Symbol.search: 调用search的时候,将会调用这个函数
+```
+str.search(regexp);
+// 相当于
+regexp.[Symbol.search](str);
+```
+7. Symbol.split: 调用split的时候,将会调用这个函数
+```
+str.split(re,limit);
+// 相当于
+re[Symbol.split](str,limit);
+```
+8. Symbol.iterator: 指向对象的默认遍历器方法,进行`for..of`的时候将会调用这个函数,调用这个函数将会返回一个有next的函数,当调用这个next的时候将会返回`{value:1,done:false}`这样的值,value是当前遍历的值,done代表是否就可以进行下一步next();
+9. Symbol.toPrimitive: 当类型转换的时候将会调用这个函数
+```
+let obj = {};
+String(obj);
+// 相当于
+obj[Symbol.toPromitive]('string');
+```
+10. Symbol.toStringTag: 一个属性,返回的值将会出现在toString的字符串中,比如Math[Symbol.toStringTag]: 'Math' Math.toString() === `[object Math]`,重写了toString的会按照toString的逻辑处理
+11. Symbol.unscopables: 一个对象,其中包含了不会被with语法块的作用域下找的属性。
+## Set/WeakSet
+- Set类似于数组,但是成员的值都是唯一的,没有重复的值,可以接受数组(或者具有iterator接口的数据成员)作为参数,用来初始化`new Set([1,1,3,4]) // [1,3,4]`
+- 拥有size属性获取Set元素总数
+- add(val)/delete(val)/has(val)/clear(): 分别用来增加/删除元素、判断元素是否存在、清空所有成员
+- keys()/values()/entries()/forEach(): 前三个返回的都是遍历器对象{next: () => {//..}}。后一个和数组一致,注意Set没有键名只有键值(或者说都一样)、forEach((key,value) => {//..})
+- 可以使用Array.form()、扩展运算符将Set转化为数组
+- WeakSet只有add、delete、has方法没有清空和遍历方法。WeakSet的值都是弱引用,并且WeakSet中只能存放对象
+## Map/WeakMap
+- 也是键-值对结构的集合,但是对象只接受字符串/Symbol当做键名Map不限数据类型
+- Map可以使用new Map()来创建可以填入一个entries结构的作为参数
+- size属性获取成员总数
+- set(key,value)/get(key)/has(key)/delete(key)/clear(): 分别用来设置/获取/判断是否存在/删除成员、清除map
+- keys()/values()/entries/forEach(): 和Set的一致
+- 可以用扩展运算符等转换为对象,如果key不是字符串将会调用toString、
+- WeakMap和Map类似只不过key只接受对象,并且都是弱引用,也只有set/get/has
 ## Proxy
-
+- 名字就很明显了,给对象设置一层代理,对对象进行任何操作的时候进行代理
+- 当使用proxy代理对象后,使用proxy调用对象的方法,其中的this为proxy对象
+- Proxy支持的拦截操作如下
+- get(target,key,proxy): 在获取属性值的时候进行拦截return值为获取的值
+- set(target,key,value,proxy): 在给属性值赋值的时候拦截返一个布尔值
+- has(target,key): 拦截`key in target`的操作返回一个布尔
+- deleteProperty(target,key): 拦截 delete 操作,返回一个布尔值
+- ownKeys(targets): 拦截所有key的遍历方法,返回一个数组
+- getOwnPropertyDescriptor(target, key): 拦截`Object.getOwnPropertyDescriptor(proxy,key);//返回属性的描述对象`返回属性的描述对象
+- defineProperty(target,key,desc): 拦截`Object.defineProperty(proxy,key,desc)`/`Object.defineProerties(proxy,desc)`返回布尔值
+- preventExtensions(target): 拦截`Object.preventExtensions(proxy);//让对象无法新增属性`返回布尔值
+- getProtypeOf(target): 拦截`Object.getProtypeOf(proxy)`,返回一个对象
+- isExtensible(target): 拦截`Object.isExtensible(proxy);// 判断对象是否可扩展`返回布尔值
+- setPrototypeOf(target,proto): 拦截`Object.setPrototypeOf(proxy,proto)`,返回一个布尔值
+- apply(target,object,args): 拦截调用的操作比如`proxy(...args);proxy.call();proxy.apply()`等
+- construct(target,args): 拦截使用`new`比如`new proxy(...args)`
 ## Reflect
-
+- Reflct 只是将`Object`对象的一些明细属于语言内部的方法,放到Reflect对象
+- Reflct的方法和Proxy的拦截操作方法一一对应,不同的是Proxy是拦截,Reflct调用时直接操作,参数也和上面完全一致,比如
+- 想要删除`obj`的`foo`属性的时候`Reflect.deleteProperty(obj,'foo')`
 ## Promise
-
+- Promise是异步解决方案,分为三个状态`pending`进行中,`fullfilled`成功,`reject`失败
+- 定义方式`let p = new Promise((resolve,reject) => {})` 传入Promise的函数会立即调用,函数会传入两个参数`resolve`和`reject`,当调用`resolve`之后`p`的状态就会变为`fullfilled`,调用`reject`之后状态就会变为`rejected`
+- promise实例可以调用`then`方法,then方法会在`p`的状态变为`fullfilled`之后将第一个参数的函数加入到微任务池中,变为`reject`之后会将第二个参数加入微任务队列比如`p.then((val) => {},(e) => {})`then中函数传入的值为上一个promise返回的值,并且then方法会返回一个promise对象,也就是说你可以一直`then`下去,如果你then中的函数返回的一个promise对象下一个then就是根据返回的这个promise对象来判断,如果不是promise那就会将开始的状态传递下去,但是遇到reject就会停止
+- catch(fn) 相当于 then(,fn) 本质还是`then`
+- finally(fn) 不管最后是什么状态都会调用其函数 本质还是`then`
+- Promise.all(promiseArr) 接收一个数组,返回一个promise对象数组中都是promise对象 当数组中的promise所有状态都变为`fullfilled`返回的promise才会变成`fullfilled`否则就是`rejected`resolve中的值为数组,数组中为所有promise的值
+- Promise.race(): 和all基本一样,只不过数组中只要有一个变成`fullfilled`就立马变成`fullfilled`
+- Promise.allSelected() 和all基本一样,只不过all遇到有`rejected`的就直接改变`rejected`状态,而`allSelected`会等所有都执行完在改变状态
+- Promise.any(): 和all反着来,只要有一个fulfilled就会fullfilled,同样会等待所有promise都执行完
+- Promise.resolve(): 返回一个`fullfilled`状态的promise
+- Promise.reject(): 返回一个`rejected`状态的promise
+- Promise.try(fn): 传入一个函数如果是同步的就同步执行,异步的使用then捕获
 ## Iterator
 
 ## Generator
