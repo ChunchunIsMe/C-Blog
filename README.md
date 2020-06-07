@@ -16,15 +16,14 @@
   - [图](./algorithm/graph)
   - [排序和搜索](./algorithm/sortAsearch)
   - [算法设计与技巧](./algorithm/think)
-  - [复杂度计算(建设中)]()
 ### JavaScript
-  - [JS基础(建设中)]()
+  - [JS基础](./JavaScript/base)
   - [ES6重新整理](./JavaScript/ES6);
+  - [ajax/fetch/axios](./JavaScript/Fetch)
   - [JS方法实现(建设中)]()
   - [JS执行上下文与作用域链](./JavaScript/Scope)
   - [用浏览器展示WeakSet/WeakMap](./JavaScript/Weak)
   - [纯前端mock](https://github.com/ChunchunIsMe/ObjectDefineMock)
-
 ### node
   - [node模块(建设中)]()
   - [express简单实现](https://github.com/ChunchunIsMe/LearningNode/tree/master/expressSourceCode/selfCreate)
