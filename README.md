@@ -24,6 +24,7 @@
   - [JS执行上下文与作用域链](./JavaScript/Scope)
   - [用浏览器展示WeakSet/WeakMap](./JavaScript/Weak)
   - [纯前端mock](https://github.com/ChunchunIsMe/ObjectDefineMock)
+  - [JavaScript中Number的储存方式](https://github.com/ChunchunIsMe/redux-source-code/blob/master/Number.md) 
 ### node
   - [node模块(建设中)]()
   - [express简单实现](https://github.com/ChunchunIsMe/LearningNode/tree/master/expressSourceCode/selfCreate)
