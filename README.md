@@ -6,6 +6,7 @@
 
 ### 数据结构/算法
   - [字符串](./algorithm/str)
+  - [进制算法](./algorithm/code)
   - [数组](./algorithm/array)
   - [栈](./algorithm/stack)
   - [队列](./algorithm/queue)
@@ -20,9 +21,11 @@
   - [盒模型](./css/box)
   - [BFC](./css/BFC)
   - [flex](./css/flex)
+  - [position](./css/position)
 ### JavaScript
   - [JS基础](./JavaScript/base)
-  - [ES6重新整理](./JavaScript/ES6);
+  - [ES6重新整理](./JavaScript/ES6)
+  - [几种判断类型的方法](./JavaScript/checkType)
   - [ajax/fetch/axios](./JavaScript/Fetch)
   - [JS方法实现(建设中)]()
   - [JS执行上下文与作用域链](./JavaScript/Scope)
@@ -42,7 +45,7 @@
   - [浏览器的进程与线程模型](./browser/browserMod)
   - [浏览器缓存](./browser/cache)
   - [浏览器跨页面通信](./browser/tabMessage)
-  - [九种跨域总结(建设中)]()
+  - [九种跨域总结](./browser/origin)
 ### react
   - [react知识整理](https://github.com/ChunchunIsMe/learningReact)
   - [redux源码分析](https://github.com/ChunchunIsMe/redux-source-code)
