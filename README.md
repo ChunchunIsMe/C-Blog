@@ -49,7 +49,9 @@
   - [history源码分析](https://github.com/ChunchunIsMe/history-source-code)
   - [react-router源码分析](https://github.com/ChunchunIsMe/react-router-source-code)
   - [手写diff](./react/virtualDom)
-  - [fiber架构(建设中)]()
+  - [setState原理](./react/setState)
+  - [hook原理](./react/hook)
+  - [fiber架构(建设中)](./react/fiber)
 ### npm/yarn
   - [npm用法和介绍](./npm/introduction)
 
