@@ -31,7 +31,9 @@
   - [JS执行上下文与作用域链](./JavaScript/Scope)
   - [用浏览器展示WeakSet/WeakMap](./JavaScript/Weak)
   - [纯前端mock](https://github.com/ChunchunIsMe/ObjectDefineMock)
+  - [防抖与节流](./JavaScirpt/debounceAndthrottle)
   - [JavaScript中Number的储存方式](https://github.com/ChunchunIsMe/redux-source-code/blob/master/Number.md) 
+  - [各个版本前端模块化的区别]()
 ### node
   - [node模块(建设中)]()
   - [express简单实现](https://github.com/ChunchunIsMe/LearningNode/tree/master/expressSourceCode/selfCreate)
@@ -53,8 +55,8 @@
   - [history源码分析](https://github.com/ChunchunIsMe/history-source-code)
   - [react-router源码分析](https://github.com/ChunchunIsMe/react-router-source-code)
   - [手写diff](./react/virtualDom)
-  - [setState原理](./react/setState)
-  - [hook原理](./react/hook)
+  - [setState原理(建设中)](./react/setState)
+  - [hook原理(建设中)](./react/hook)
   - [fiber架构(建设中)](./react/fiber)
 ### npm/yarn
   - [npm用法和介绍](./npm/introduction)

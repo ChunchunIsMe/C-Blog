@@ -13,7 +13,7 @@ cookie的属性:
 - size: Cookie大小
 - HttpOnly: 如果为true只有在http请求头中带有此cookie的信息
 - secure: 是否只能通过https来传递这条cookie
-- sameSite: 阻止与跨站点请求一起发送。
+- sameSite: 阻止与跨站点请求一起发送。(如果需要AJAX带上第三方cookie则需要使用withcredentials)
    - Strict:严格模式,表明这个cookie在任何情况下都不可能作为第三方的cookie没有例外.
    - Lax: 宽松模式,如果是GET请求,这个cookie可以通过第三方cookie
 - Priority: 优先级: 比如在`b.a.com`登录了又在`c.a.com`登录了这个时候可能有两个登录cookie,就可以使用这个值来进行设置优先级
