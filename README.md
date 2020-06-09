@@ -77,7 +77,7 @@
   - [https](./webServer/https)
   - [cookie/session/token](./webServer/cookie)
   - [网络安全](./webServer/webSafe)
-  - [dns(建设中)](./webServer/dns)
+  - [dns](./webServer/dns)
   - [cdn(建设中)](./webServer/cdn)
   - [状态码(建设中)](./webServer/statusCode)
   - [头部字段(建设中)](./webServer/head)
