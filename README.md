@@ -45,7 +45,8 @@
   - [浏览器的进程与线程模型](./browser/browserMod)
   - [浏览器缓存](./browser/cache)
   - [浏览器跨页面通信](./browser/tabMessage)
-  - [九种跨域总结](./browser/origin)
+  - [几种跨域总结](./browser/origin)
+  - [浏览器路由原理](./browser/route)
 ### react
   - [react知识整理](https://github.com/ChunchunIsMe/learningReact)
   - [redux源码分析](https://github.com/ChunchunIsMe/redux-source-code)

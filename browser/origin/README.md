@@ -1,4 +1,4 @@
-## 跨域的九种方式
+## 跨域的几种方式
 同源策略就是当浏览器的域名和请求的协议/端口/域名不同时,浏览器禁止发送该AJAX请求
 
 但是 img/link/script是允许跨域加载资源的
@@ -32,7 +32,7 @@ function JSONP(url,funcname,callback) {
 
 不符合以上请求的就是复杂请求了
 
-复杂请求,首先会发起一个预检请求,该请求是`option`方法的,通过该方法来知道服务端是否允许跨域
+复杂请求,会在通信之前,增加一次HTTP查询请求,被称为预检请求,该请求是`option`方法的,通过该方法来知道服务端是否允许跨域
 
 当我们使用复杂请求的时候,后台需要做如下配置
 ```
@@ -41,10 +41,77 @@ if(req.method==='OPTIONS') {
 }
 ```
 ### document.domain
+在资源和浏览器二级域名相同的情况下,比如`c.a.com`和`b.a.com`我们就可以使用`document.domain = a.com`
+### postMessage
+postMessage是H5 XMLHttpRequest Level2 中的API,而且是为数不多的可以跨域操作的window属性之一,它可用于解决以下问题
+- 页面和其打开的新窗口数据传递
+- 多窗口之间消息传递
+- 页面与嵌套的iframe消息传递
+- 上面三个场景的跨域数据传递
 
-### postmassage
-
-### webSocket
-
+> postMessage方法允许来自不同源的脚本采用异步方式进行有限的通信,可以实现跨文本档、多窗口、跨域消息传递
+```
+otherWindow.postMessage(message,targetOrigin,[transfer]);
+```
+下面来看一个例子从`http://localhost:3000/a.html`页面向`http://localhost:4000/b.html`传递消息
+```
+// a.html
+<iframe src="http://localhost:4000/b.html" id="iframe"></iframe>
+<script>
+  function load() {
+    const iframe = document.getElementById('iframe');
+    iframe.contentWindow.postMessage('hi','http://localhost:4000');
+    window.onmessage = function (e) {
+      console.log(e);
+    }
+  }
+</script>
+// b.html
+window.onmessage = (e) => {
+  console.log(e.data);
+  e.source.postMessage('hi!', e.origin);
+}
+```
+### WebSocket
+WebSocket是HTML5的一个持久化的协议,它实现了浏览器和服务器的全双工通信,同时也是跨域的一种解决方案。WebSocket和HTTP都是应用层协议,都基于TCP协议。但是WebSocket是一种双向通信协议,在建立连接之后,WebSocket的server和client都能主动向对方发送或接收数据。同时,WebSocket在建立连接时需要借助HTTP协议,连接建立好了之后client和server之间的双向通信就和HTTP无关了
+```
+// socket.html
+<script>
+  const socket = new WebSocket('ws://localhost:3000');
+  socket.onopen = function () {
+    socket.send('hi');
+  }
+  socket.onmessage = function () {
+    console.log(e.data);
+  }
+</script>
+// server.js
+const express = require('express');
+const app = express();
+const WebSocket = require('ws');
+const wss = new WebSocket.Server({port: 3000});
+wss.on('connect',function (ws) {
+  ws.on('message', function (data) {
+    console.log(data);
+    ws.send('byebye')
+  })
+})
+```
 ### 服务器代理
-
+因为同源策略是浏览器的,如果使用代理服务器进行代理请求则不会发生跨域,我们可以使用正向代理/反向代理
+### location.hash
+实现原理:通过iframe监听其hash变化来进行跨域
+```
+// a.html
+<iframe src="https://localhost:4000/b.html" id="iframe"></iframe>
+<script>
+  const iframe = document.getElementById('iframe');
+  iframe.contentWindow.location.hash = "gg";
+</script>
+// b.html
+<script>
+  window.onhashchange = funciton () {
+    console.log(location.hash);
+  }
+</script>
+```
