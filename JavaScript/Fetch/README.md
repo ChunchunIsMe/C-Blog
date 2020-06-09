@@ -48,5 +48,49 @@ const request = new XMLHttpRequest();
 - request.setRequestHeader(header, value): 必须在open和send之间调用,设置请求头
 
 ## Fetch
+fetch提供了一种简单,合理的方式来跨网络异步获取资源,但是和ajax有些不同
+- 返回一个promise,但是如果接收到一个错误的HTTP状态码的时,从fetch返回的Promise也不会标记为rejected,即使响应的HTTP状态码是404或500。相反,它会将Promise的状态标记为resolve,仅当网络故障或者请求被阻止的时候才将状态改为reject
+- fetch不会接受跨域cookies;你也不能使用fetch()建立跨域会话。其他网站的`set-cookie`头部字段将会被无视,但是可以设置credentials来进行改变
 
-## Axios
+1. 基本使用
+```
+fetch(url).then(res => {
+   consolo.log(res);
+})
+```
+2. fetch的参数
+- input: 定义要获取的资源,这可能是
+   - 一个USVString字符串,包含要获取资源的URL。一些浏览器会接受blob和data:作为schemes
+   - 一个Request对象(后面会说到)
+- init(可选): 一个配置项对象,包括所有对请求的设置。可选的参数有:
+   - method: 请求使用的方法
+   - header: 请求的头信息,形式为Headers的对象或包含ByteString值的对象字面量
+   - body: 请求的body信息: 可能是一个Bolb、BufferSource、FormData、URLSearchParams或者USVString对象。注意GET、HEAD方法的请求不能包含body信息
+   - mode: 请求的模式 比如 cors、no-cors或者same-origin
+   - credentials: 请求凭证的允许(cookie可以通过这个设置)可以设置 omit(不允许)、same-origin(只携带同源)、include(包含第三方cookie)
+   - cache: 请求的cache模式: default、no-store、reload、no-cache、force-cache或者only-if-cached
+   - redirect: fllow(自动重定向)、error(如果产生重定向将自动终止并且抛出一个错误)、manual(手动重定向)
+   - referrer: 一个USVString可以是no-referrer、client或一个URL。默认是client
+   - refererPolicy: 制定头部referer字段的值。可能为以下值之一: no-referer、no-referer-when-downgrade、origin、origin-when-cross-origin、unsafe-rul
+   - integery: 包括请求的subresource integerity(使用base64编码过后的文件哈希值写入你使用的script或link标签的integeity属性即可启用子资源完整性功能)值
+
+2. fetch返回的body
+
+Body mixin代表了fetch中响应/请求的正文,允许你声明其内容是什么,以及应该如何处理。
+
+属性
+- Body.body(只读): 一个简单的getter用于暴露一个ReadableString类型的主题内容
+- Body.bodyUsed(只读): 一个Boolean值指示是否body已经被读取
+
+方法
+- Body.arrayBuffer()
+- Body.blob()
+- Body.forData()
+- Body.json()
+- Body.text()
+
+上述方法都是首先挂起一个流操作然后在完成是读取它的值然后返回一个promise当读取完成时候,resolve传入的值是方法名类型的。这些方法都会将Body.bodyUsed变为可读
+
+4. Header、request、response 构造器
+
+fetch还可以通过上述构造器来进行构造响应头、请求头和响应体来创建参数这里就不再说下去了,因为浏览器还在实现呢！

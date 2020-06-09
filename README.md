@@ -26,7 +26,7 @@
   - [JS基础](./JavaScript/base)
   - [ES6重新整理](./JavaScript/ES6)
   - [几种判断类型的方法](./JavaScript/checkType)
-  - [ajax/fetch/axios](./JavaScript/Fetch)
+  - [ajax/fetch](./JavaScript/Fetch)
   - [JS方法实现(建设中)]()
   - [JS执行上下文与作用域链](./JavaScript/Scope)
   - [用浏览器展示WeakSet/WeakMap](./JavaScript/Weak)
