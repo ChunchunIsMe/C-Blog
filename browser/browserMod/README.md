@@ -101,7 +101,7 @@ GPU中,各个复合图层是单独绘制的,所以互不影响,这也是为什�
 如何创建复合图层(合成层)呢?
 
 - 直接原因
-   - <video><iframe><canvas><webgl>等元素
+   - `<video><iframe><canvas><webgl>`等元素
    - 3d或透视变换css属性,比如translate3d,translateZ等等
    - 混合插件 (比如flash)
    - position: fixed

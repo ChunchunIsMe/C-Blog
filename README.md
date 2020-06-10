@@ -35,6 +35,7 @@
   - [防抖与节流](./JavaScirpt/debounceAndthrottle)
   - [JavaScript中Number的储存方式](https://github.com/ChunchunIsMe/redux-source-code/blob/master/Number.md) 
   - [各个版本前端模块化的区别](./JavaScript/module)
+  - [如何判断DOM是否在窗口中出现](./JavaScript/lazy)
 ### node
   - [node模块(建设中)]()
   - [express简单实现](https://github.com/ChunchunIsMe/LearningNode/tree/master/expressSourceCode/selfCreate)
