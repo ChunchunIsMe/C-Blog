@@ -40,6 +40,8 @@ class Tree {
     }
   }
 
+
+
   static midOrderCallback(node, callback) {
     if (node.left) {
       this.midOrderCallback(node.left)
@@ -50,18 +52,18 @@ class Tree {
     }
   }
 
-  // static midOrderCircle(node, callback) {
-  //   const stash = [node];
-  //   while (stash.length) {
-  //     if(stash[length-1].right) {
-  //       stash.push(right)
-  //     }
-  //     if(stash[length-1].left) {
-  //       stash.unshift(left)
-  //     }
-      
-  //   }
-  // }
+  static midOrderCircle(node, callback) {
+    var stash = [];
+    while (node != null || stash.length > 0) {
+      while (node != null) {
+        stash.push(node);
+        node = node.left;
+      }
+      const curr = stash.pop();
+      callback(curr);
+      node = curr.right;
+    }
+  }
 
   static afterOrderCallback(node, callback) {
     if (node.left) {
@@ -71,6 +73,29 @@ class Tree {
       this.midOrderCallback(node.right)
     }
     callback(node);
+  }
+
+  static afterOrderCircle(node, callback) {
+    var stash = [];
+    if (node != null) {
+      stash.push(node);
+      stash.push(node);
+    }
+    while (stash.length > 0) {
+      const curr = stash.pop();
+      if (stash.length > 0 && stash[stash.length - 1] === curr) {
+        if (curr.right != null) {
+          stash.push(curr.right);
+          stash.push(curr.right);
+        }
+        if (curr.left != null) {
+          stash.push(curr.left);
+          stash.push(curr.left);
+        }
+      } else {
+        callback(curr);
+      }
+    }
   }
 
 }
