@@ -8,7 +8,6 @@ function DFS(graph, callback) {
   function depthFirstSearchVisit(u) {
     const neighbors = adjList.get(u);
     color[u] = Colors.GRAY
-    debugger;
     for (let i = 0; i < neighbors.length; i++) {
       const element = neighbors[i];
       if (color[element] === Colors.WHITE) {

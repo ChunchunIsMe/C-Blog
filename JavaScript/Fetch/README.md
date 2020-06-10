@@ -45,6 +45,7 @@ const request = new XMLHttpRequest();
 - request.open(method(请求方法), url(请求路径), async(默认为true,表示是否异步,可选), user(可选用户名用于认证默认为null), password(可选密码用于认证默认为null)): 初始化一个请求:但是如果为已激活的请求调用该方法,相当于调用abort()
 - request.overrideMimeType(): 指定一个MIME类型用于替代服务器指定的类型,使服务器传输的数据按照MIME类型处理,需要在send前调用
 - request.send(): 用于发送http请求。如果是异步会在请求后立即返回,如果同步会在响应到达后返回
+   - 可选参数,可填ArrayBuffer/ArrayBufferView/Blob/Document/DOMString/FormData
 - request.setRequestHeader(header, value): 必须在open和send之间调用,设置请求头
 
 ## Fetch
