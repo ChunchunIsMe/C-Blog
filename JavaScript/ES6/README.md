@@ -55,7 +55,11 @@ const {val:c=2,doc:d:3} = obj;
 - 指数运算符 **: 2的3次方`2**3`
 - Math.trunc(): 去除参数的小数部分后返回
 ## 函数
-- 箭头函数: this变为定义时上下文this且不能改变
+- 箭头函数: 
+   - this变为定义时上下文this且不能改变
+   - 是匿名函数,不能当作构造函数,不能使用new
+   - 不能使用arguments,需要用rest代替
+   - 不能当作generator,不能使用yield关键字
 - rest参数: 使用解构赋值代替`arguments`比如`function(...rest){}`
 - name属性: 返回函数名
 - 尾调用优化: 增加尾调用优化

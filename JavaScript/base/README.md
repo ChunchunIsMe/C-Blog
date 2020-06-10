@@ -22,3 +22,5 @@
    - 拥有其他字符的字符串: NaN (但是如果使用parseInt他会取字符串最开始的数字进行转换,直到遇到不是数字则将后续舍弃,但是ParseInt转换空字符串是NaN并且开头不是数字也将是NaN)
    - 对象: 如果有`[Symbol.toPrimitive]`就取它的返回值,没有就取`valueOf`再没有就取`toString`
 - 值转换为String: 调用各自的toString()方法但是如果是 null 和 undefined 是没有toString方法的,他们则转换为'null'和'undefined1',且Number的toString方法是可以输入值将其转换为2、8、16进制的字符串
+## 闭包
+红宝书: 有权访问另一个函数作用域的变量的函数
