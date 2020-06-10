@@ -3,6 +3,7 @@
 - [选择排序](./select.js)
 - [插入排序](./insert.js)
 - [快速排序](./fast.js)
+- [希尔排序](./shell.js)
 - [归并排序](./mergeSort.js)
 - [计数排序](./countingSort.js)
 - [桶排序(建设中)]()
