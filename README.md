@@ -22,6 +22,7 @@
   - [BFC](./css/BFC)
   - [flex](./css/flex)
   - [position](./css/position)
+  - [重绘与回流(重排)](./css/repaintAndReflow)
 ### JavaScript
   - [JS基础](./JavaScript/base)
   - [ES6重新整理](./JavaScript/ES6)
@@ -33,7 +34,7 @@
   - [纯前端mock](https://github.com/ChunchunIsMe/ObjectDefineMock)
   - [防抖与节流](./JavaScirpt/debounceAndthrottle)
   - [JavaScript中Number的储存方式](https://github.com/ChunchunIsMe/redux-source-code/blob/master/Number.md) 
-  - [各个版本前端模块化的区别]()
+  - [各个版本前端模块化的区别](./JavaScript/module)
 ### node
   - [node模块(建设中)]()
   - [express简单实现](https://github.com/ChunchunIsMe/LearningNode/tree/master/expressSourceCode/selfCreate)
@@ -84,5 +85,6 @@
 ### babel
   - [babel简单使用](./babel/use)
 ### 梳理和知识串联
-  - [从输入URL到页面加载的过程-知识梳理(建设中)]()
+  - [从输入URL到页面加载的过程-知识梳理](./total/url2page)
+  - [网站性能优化](./total/webPerformance)
 ### git
