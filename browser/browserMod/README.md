@@ -109,7 +109,7 @@ GPU中,各个复合图层是单独绘制的,所以互不影响,这也是为什�
    - will-change设置opacity/transform/top/left/bottom/right(其中top/left等需要设置明确的定位属性,比如relative等)
 - 其他元素原因
    - 有合成层后代同时本身有 transform/opacity(小于1)/mask/fliter/reflection/overflow不为visible
-   - 有z-index小与当前元素的兄弟合成层元素
+   - 有z-index小与当前元素的兄弟合成层元素(且当前元素是合成层)
   
 一般来说想要硬件加速使用`transform: translateZ(0)`或者`transform:translate3d(0,0,0)`或者设置`will-change`等
 
