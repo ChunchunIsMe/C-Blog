@@ -48,3 +48,9 @@ console.log(mod.count); // 3
 mod.addCount();
 console.log(mod.count); // 4
 ```
+## TreeShake
+Web的TreeShake就是依靠ESModule在编译时输出静态值的引用来做的
+
+因为ESModule模块依赖关系是确定的,和运行时的状态无关,所以可以进行可靠的静态分析,这就是tree-shaking的基础
+
+而如果使用CommonJS是运行时导出值的拷贝,那么做tree-shaking基本不可能

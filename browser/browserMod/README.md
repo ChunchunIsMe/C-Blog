@@ -130,6 +130,8 @@ GPU中,各个复合图层是单独绘制的,所以互不影响,这也是为什�
 - 两个要合成的复合图层有不同opacity/transform/filter值的父级
 - 正在执行动画的复合图层
 
+> 如何查看复合图层? 浏览器->调试者工具->More tools->Rendering->勾选Layer borders
+
 ### 从Event Loop谈JS的运行机制
 JS执行是单线程但是浏览器进行运行JS时是用多线程的
 - JS引擎线程
