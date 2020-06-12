@@ -16,8 +16,32 @@ function flatObj(obj) {
   return result;
 }
 
-const obj = {a:1,b:{c:{e:1},d:{f:3}}}
+function reverseObj(obj) {
+  const keys = Reflect.ownKeys(obj);
+  const values = keys.map(item => obj[item]);
+  const result = {};
+  while (keys.length > 0) {
+    let curr = result;
+    const key = keys.shift().split('.');
+    const value = values.shift();
+    for (let i = 0; i < key.length - 1; i++) {
+      const ele = key[i];
+      if (ele in curr) {
+        curr = curr[ele];
+        continue;
+      }
+      curr[ele] = {};
+      curr = curr[ele];
+    }
+    curr[key[key.length - 1]] = value;
+  }
+  return result;
+}
+
+const obj = { a: 1, b: { c: { e: 1 }, d: { f: 3 } } }
 
 const res = flatObj(obj);
 
 console.log(res);
+
+console.log(reverseObj(res));

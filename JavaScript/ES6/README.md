@@ -175,8 +175,8 @@ obj[Symbol.toPromitive]('string');
 - getProtypeOf(target): 拦截`Object.getProtypeOf(proxy)`,返回一个对象
 - isExtensible(target): 拦截`Object.isExtensible(proxy);// 判断对象是否可扩展`返回布尔值
 - setPrototypeOf(target,proto): 拦截`Object.setPrototypeOf(proxy,proto)`,返回一个布尔值
-- apply(target,object,args): 拦截调用的操作比如`proxy(...args);proxy.call();proxy.apply()`等
-- construct(target,args): 拦截使用`new`比如`new proxy(...args)`
+- apply(target,object,args): 拦截调用的操作比如`proxy(...args);proxy.call();proxy.apply()`等。这个代理的必须是函数对象不行
+- construct(target,args): 拦截使用`new`比如`new proxy(...args)`。这个代理的必须是函数对象不行
 ## Reflect
 - Reflct 只是将`Object`对象的一些明细属于语言内部的方法,放到Reflect对象
 - Reflct的方法和Proxy的拦截操作方法一一对应,不同的是Proxy是拦截,Reflct调用时直接操作,参数也和上面完全一致,比如
