@@ -21,6 +21,37 @@
     p+div {
       color: blue;
     }
+
+    .tran {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      transition: all 2s ease .5s;
+    }
+
+    .tran:hover {
+      width: 400px;
+      background-color: blue;
+    }
+
+    .animation {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      animation: change 2s infinite alternate
+    }
+
+    @keyframes change {
+      form {
+        width: 100px;
+        background-color: red;
+      }
+
+      to {
+        width: 500px;
+        background-color: blue;
+      }
+    }
   </style>
 </head>
 
@@ -41,6 +72,8 @@
   <div>1323123123123</div>
   <p>222</p>
   <div>1323123123123</div>
+  <div class="tran"></div>
+  <div class="animation"></div>
   <script>
     var out, outC;
     function a() {

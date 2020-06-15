@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .tran {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      transition: all 2s ease .5s;
+    }
+
+    .tran:hover {
+      width: 400px;
+      background-color: blue;
+    }
+
+    .animation {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      animation: change 2s infinite alternate
+    }
+
+    @keyframes change {
+      form {
+        width: 100px;
+        background-color: red;
+      }
+
+      to {
+        width: 500px;
+        background-color: blue;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="tran"></div>
+  <div class="animation"></div>
+</body>
+
+</html>
