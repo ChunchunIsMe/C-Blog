@@ -24,6 +24,9 @@
   - [flex](./css/flex)
   - [position](./css/position)
   - [重绘与回流(重排)](./css/repaintAndReflow)
+  - [选择器](./css/selector)
+  - [transform](./css/transform)
+  - [动画](./css/animationAtransition)
 ### JavaScript
   - [JS基础](./JavaScript/base)
   - [ES6重新整理](./JavaScript/ES6)
@@ -37,6 +40,8 @@
   - [JavaScript中Number的储存方式](https://github.com/ChunchunIsMe/redux-source-code/blob/master/Number.md) 
   - [各个版本前端模块化的区别](./JavaScript/module)
   - [如何判断DOM是否在窗口中出现](./JavaScript/lazy)
+  - [DOM](./JavaScript/DOM)
+  - [BOM](./JavaScript/BOM)
 ### node
   - [node模块(建设中)]()
   - [express简单实现](https://github.com/ChunchunIsMe/LearningNode/tree/master/expressSourceCode/selfCreate)
