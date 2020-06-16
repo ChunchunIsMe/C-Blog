@@ -28,33 +28,38 @@ link 规定了当前文档和外部资源的关系.该元素最常用于链接�
 - integrity 包含行内元数据,是一个你用浏览器获取资源文件的哈希值,用base64编码的方式加密,这样用户能用它来验证一个获取到的资源,在传送中没有被非法篡改
 - media 规定了外部资源适用的媒体类型。它的值必须媒体查询
 - referrerpolicy 指示获取资源时带不带referrer
+   - no-referrer 表示Referer标头不会发送
+   - no-referrer-when-downgrade 的原始位置不会发送任何Referer标头。(默认)
+   - origin 意味着引荐来源地址僵尸页面的来源,大致的方案是主机和端口
+   - origin-when-cross-origin 这意味着导航到其它来源仅限于方案
+   - unsafe-url 意味着引荐来源网址和路径(但不包括片段,密码和用户名)。这种情况是不安全的
 - rel 命名连接文档与当前文档的关系
-   - alternate
-   - author 定义一个超链接一个描述作者信息页面或者提供一个方法联系作者
-   - bookmark 表明这个链接是一个固定链接,对于最近的`<article>`祖先标签.如果没有,则表最近的section标签
-   - canonical
-   - dns-prefetch
-   - external
-   - help
-   - icon
-   - import
-   - license
-   - manifest
-   - modulepreload
-   - next
-   - nofollow
-   - noopener
-   - opener
-   - pingback
-   - preconnect
-   - prefetch
-   - preload
-   - prerender
-   - prev
-   - search
-   - shortlink
-   - stylesheet
-   - tag
+   - alternate 如果是`<link>`元素,并且rel属性包括stylesheet,则这个link定义为alternate样式表,那样的话`title`属性不能为空.如果`type`设置`application/rss+xml`或者`application/atom+xml`,则被link定义为syndication feed 页面中第一个被定义的为默认的  (`<a> <area> <link>`)
+   - author 定义一个超链接一个描述作者信息页面或者提供一个方法联系作者 (`<a> <area> <link>`)
+   - bookmark 表明这个链接是一个固定链接,对于最近的`<article>`祖先标签.如果没有,则表最近的section标签 (`<a> <area>`)
+   - canonical 规范链接元素是一个HTML元素,它通过指定web页面的"规范"或"首选"版本作为搜索优化的一部分,帮助网站管理员防止重复的内容问题  (`<link>`)
+   - dns-prefetch 提示浏览器在该资源需要在用户点击链接之前进行DNS查询和协议握手  (`<link>`)
+   - external 表明这个链接是一个相对于当前网站的外部资源。点开这个链接会离开当前网站  (`<a> <area>`)
+   - help 如果是一个`<a> <area>`表明这个链接到一个关于父亲标签和它后代的进一步帮助资源,如果是一个`<link>`标签,help表明这个链接是一个关于整个页面的进一步帮助资源 (`<a> <area> <link>`)
+   - icon 定义一个在用户界面代表这个页面的资源,通常是一个图标(包括声音和图像)  (`<link>`)
+   - license 表示超链接指向许可信息的文档。如果不在`<head>`元素内,则该标准不会区分应用于文档特定部分或整个文档的超链接。  (`<a> <area> <link>`)
+   - manifest 表示链接到的文件是 Web App Manifest (`<link>`)
+   - modulepreload 更早和更优先级的加载模块脚本  (`<link>`)
+   - next 表明该超链接指向的是当前页面所在序列中的下一个资源 (`<a> <area> <link>`)
+   - nofollow 表明文档不想宣传链接的文档  (`<a> <area>`)
+   - noopener 指示浏览器打开链接而不授权新的浏览上下文对打开它的文档的访问权限-通过再打开的窗口不设置`window.opener`属性,当打开不信任的链接时,这个特别有用,因为它无法通过`window.opener`来篡改原始文档 (`<a> <area>`)
+   - noreferrer 阻止浏览器导航到另一个页面时,通过Referer: HTTP header将该页面地址或者任何其他值作为Referrer发送  (`<a> <area>`)
+   - opener 恢复带有`target="_blank"`的链接上的隐式`rel="noopener"`添加  (`<a> <area> <form>`)
+   - pingback 定义一个外部资源URI,以便在对该网页发表评论或引用时调用  (`<link>`)
+   - preconnect 向浏览器提供提示,建议浏览器提前打开与链接网站的连接,而不会泄露任何私人信息或下载任何内容,以便在跟随链接时可以更快地获取链接内容  (`<link>`)
+   - prefetch 提示浏览器提前加载链接的资源,因为它可能会被用户请求。 (`<a> <area> <link>`)
+   - preload 告诉浏览器下载资源,因为在当前导航期间稍后将需要该资源  (`<link>`)
+   - prerender 建议浏览器事先获取链接的资源,并建议将预取的内容显示在屏幕外,以便在需要时可以将更快速的呈现给用户
+   - prev 指示超链接指向当前页面所在序列的优先资源  (`<a> <area> <link>`)
+   - search 表示超链接引用了一个文档,该文档的接口专门设计用于在此文档或站点及其资源中进行搜索  (`<a> <area> <link>`)
+   - shortlink 一些网站创建短链接,使通过即时消息共享链接更容易  (`<link>`)
+   - stylesheet 定义要用作样式表的外部资源。如果没有设置`type`,再进一步检查之前,浏览器应该假定他是`text/css`样式表  (`<link>`)
+   - tag 指示超链接引用了描述适用于该文档的标签的文档  (`<a> <area>`)
 - sizes 定义相应资源的可视化媒体中icons的大小。他只有在rel包含icon的link类型值
 - title 属性在`<link>`元素上有特殊的语义。当用于`<link rel="stylesheet">`时,它定义了一个首选样式表或备用样式表。不正确的使用将会被样式表忽略
 - type 这个属性被用于定义链接的内容的类型。这个属性的值应该是像`text/html`,`text/css`等MIME类型。这个属性常用的用法是定义链接的样式表,最常用的值是`text/css`
