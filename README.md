@@ -96,4 +96,7 @@
 ### 梳理和知识串联
   - [从输入URL到页面加载的过程-知识梳理](./total/url2page)
   - [网站性能优化](./total/webPerformance)
+### 性能相关
+  - [防抖](./performance/debounce)
+  - [performance](./)
 ### git
