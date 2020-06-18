@@ -40,6 +40,14 @@ if(req.method==='OPTIONS') {
   res.end();
 }
 ```
+有关CORS相关的请求头
+- access-control-allow-credentials 响应头表示是否可以将对应请求的响应暴露给页面。返回true则可以,其他值均不可以
+- access-control-allow-headers 响应头,列出了将会正式请求的`access-control-request-headers`字段中出现的首部
+- access-control-allow-methods 响应头,在预检请求的应答中明确了客户端所要访问的资源允许使用的方法或者方法列表
+- access-control-expose-headers 响应头,列出哪些首部可以作为响应的一部分暴露给外部
+- access-control-max-age (重要！！)响应头,表示预检请求返回的结果可以被缓存多久(这个options请求可以被缓存!!!)
+- access-control-request-headers 出现在预检请求头中,用于通知服务器在真正的请求中会采用哪些请求头
+- access-control-request-method 出现在预检请求头中,用于通知服务器在正常的请求中会采用那种Methods
 ### document.domain
 在资源和浏览器二级域名相同的情况下,比如`c.a.com`和`b.a.com`我们就可以使用`document.domain = a.com`
 ### postMessage
