@@ -87,5 +87,7 @@ XMLHttpRequest.prototype.send = function (...arr) {
 ```
 这样我们就实现了对ajax的监控
 
+突然又想到一种,如果需要对事件进行全局的监控的话,可以在body上注册捕获事件+冒泡事件来计算 冒泡-捕获 的时间就是执行的时间了 
+
 我在github上看到了一个比较好的实现,我的一些思路就是从上面看到的,我将它fork下来了[项目地址](https://github.com/ChunchunIsMe/monitorjs_horse)
 

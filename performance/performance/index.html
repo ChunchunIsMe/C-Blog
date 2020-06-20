@@ -48,7 +48,17 @@
     child.appendChild(text);
     p.appendChild(child);
     console.log('finish')
+    document.body.addEventListener('click', () => {
+      console.log('body', Date.now(), 1);
+    }, true)
+    img.addEventListener('click', () => {
+      for (let i = 0; i < 1000; i++) { }
+      console.log('imgclick')
+    })
+    document.body.addEventListener('click', () => {
+      console.log('body', Date.now(), 2);
+    }, false)
   </script>
 </body>
-`````
+
 </html>
