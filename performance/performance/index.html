@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    document.addEventListener('readystatechange', (e) => {
+      console.log(e, document.readyState, 'readystatechange');
+    })
+    document.addEventListener('DOMContentLoaded', (e) => {
+      console.log(e, 'DOMContentLoaded');
+    })
+    window.addEventListener('paint', (e) => {
+      console.log(e, 'paint')
+    });
+    window.addEventListener('load', (e) => {
+      console.log(e, 'window.onload');
+      console.log(window.performance.timing);
+    });
+    console.log(window.performance.timing, 'performance');
+    setTimeout(() => {
+      console.log(window.performance.timing, 'performance');
+    }, 0)
+    const startload = (e) => {
+      console.log(e, 'imgstartload')
+    }
+    const endload = (e) => {
+      console.log(e, 'imgendload')
+    }
+  </script>
+</head>
+
+<body>
+  <div>
+    <p id="p">123123123123123123123</p>
+    <img id="img" src="https://en.js.cx/clipart/train.gif?speed=1&cache=0">
+  </div>
+
+  <script>
+    console.log('script');
+    const img = document.getElementById('img');
+    const p = document.getElementById('p');
+    const child = document.createElement('div');
+    const text = document.createTextNode('div');
+    img.addEventListener('load', endload);
+    child.appendChild(text);
+    p.appendChild(child);
+    console.log('finish')
+  </script>
+</body>
+`````
+</html>

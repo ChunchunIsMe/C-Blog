@@ -1,5 +1,5 @@
-## performance
-W3C定义了一个强大的 `performance` API,其中包括了诸多指标,来看看它到底有哪些指标吧
+## Performance
+W3C定义了一个强大的 `Performance` API,可以通过`window.performance`来访问,其中包括了诸多指标,来看看它到底有哪些指标吧
 
 - memory: 浏览器内存情况
 - navigation: 网页导航相关
@@ -44,6 +44,15 @@ W3C中有张图很明确的说明了时间的各个阶段
 - loadEventStart load事件被发送时的时间戳,如果这个事件还没被发送。他的值将会是0
 - loadEventEnd 当`load`事件结束,即加载事件完成时的时间戳
 
+
+## 浏览器生命周期
+我们同样可以通过浏览器的生命周期时间来进行监控
+
+1. document.onreadystatechange(document.readyState==='loading') 此时正在加载dom(js监听不到这个事件的,因为走到js代码已经开始dom解析了)
+2. document.onreadystatechange(document.readyState==='interactive') 此时所有的dom已经加载完成,当前宏任务(script中的同步代码)也已经完成
+3. document.DOMContentLoaded 此时所有的dom已经加载完成,当前宏任务(script中的同步代码)也已经完成
+4. document.onreadystatechange(document.readyState==='complete') 此时外部资源已经加载完成(img等)
+5. window.onload  此时外部资源已经加载完成(img等)
 ## 性能监控工具
 通过上面的performance我们可以获取到
 - 重定向时间
@@ -52,7 +61,7 @@ W3C中有张图很明确的说明了时间的各个阶段
 - 传输数据时间
 - TLS握手时间
 - 数据传输时间
-- DOM解析时间
+- DOM解析/加载/渲染时间
 - js脚本执行时间
 
 接下来我们捕获一些js错误
@@ -79,3 +88,4 @@ XMLHttpRequest.prototype.send = function (...arr) {
 这样我们就实现了对ajax的监控
 
 我在github上看到了一个比较好的实现,我的一些思路就是从上面看到的,我将它fork下来了[项目地址](https://github.com/ChunchunIsMe/monitorjs_horse)
+
