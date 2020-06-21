@@ -44,14 +44,15 @@
   - [各个版本前端模块化的区别](./JavaScript/module)
   - [如何判断DOM是否在窗口中出现](./JavaScript/lazy)
   - [DOM](./JavaScript/DOM)
-  - [BOM](./JavaScript/BOM)
+  - [BOM(建设中)](./JavaScript/BOM)
+  - [WebWorker](./JavaScript/WebWorker)
 ### node
   - [node模块(建设中)]()
   - [express简单实现](https://github.com/ChunchunIsMe/LearningNode/tree/master/expressSourceCode/selfCreate)
   - [简单实现koa](./node/easyKoa/index.js)
   - [mock中间件](https://github.com/ChunchunIsMe/ServerMock)
   - [EventLoop(建设中)]()
-  - [线程与进程](./node/os)
+  - [线程与进程(建设中)](./node/os)
 ### 浏览器
   - [pwa](https://github.com/ChunchunIsMe/learningPWA)
   - [V8GC](./browser/V8GC)
@@ -71,7 +72,6 @@
   - [fiber架构(建设中)](./react/fiber)
 ### npm/yarn
   - [npm用法和介绍](./npm/introduction)
-
 ### webpack
   - [webpack基础学习](https://github.com/ChunchunIsMe/studyWebpack)
   - [webpack产物分析-从简单产物到按需加载实践](./webpack/bundleAnalysise)
