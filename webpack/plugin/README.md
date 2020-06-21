@@ -1,4 +1,4 @@
- ## 使用过的webpack插件汇总
+ ## 好用的webpack插件汇总
  - speed-measure-webpack-plugin: 打包时间分析
  - webpack-bundle-analyzer: 打包产物拆包分析
  - html-webpack-plugin: 自动生成html并且自动将打包产物用script导入
