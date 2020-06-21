@@ -10,3 +10,5 @@
  - webpack.NamedModulesPlugin: 开启HMR时使用插件会显示相对路径(位置必须在HMR后面)
  - webpack-spritesmith: 将图片合成雪碧图
  - happy-pack: 多线程打包
+ - compression-webpack-plugin 将代码进行gzip压缩
+ - prerender-spa-plugin 预渲染

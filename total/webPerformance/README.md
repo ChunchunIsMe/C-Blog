@@ -1,7 +1,7 @@
 ## 网站性能优化
 ### 网络传输性能优化
 1. 浏览器缓存: service worker/强缓存(Expires/cache-control)/协商缓存(last-Modified If-Modifiy-since/ETag If-None-Match)
-2. 资源打包压缩: webpack打包/treeshake/提取公共资源/按需加载
+2. 资源打包压缩: webpack打包/treeshake/提取公共资源/按需加载/compression-webpack-plugin进行gzip压缩/prerender-spa-plugin进行预渲染
 3. 图片资源压缩 
 - 不要在HTML中缩放图像: 如果200X200的图片容器使用400X400的图片
 - 使用雪碧图: 多张图片并在一起用background-position,多张图片并在一起会比多张的大小更小,可以使用`webpack-spritesmith`进行合成雪碧图
@@ -21,6 +21,8 @@
 - 压缩DOM的深度
 - 图片在渲染前指定大小
 - 对大量重排重绘的元素单独触发渲染层,使用硬件加速GPU分担CPU压力
+- 服务端渲染
+- 使用骨架屏优化用户体验(有更强的加载感)
 ### JS阻塞性能
 防止内存泄漏
 ### 负载均衡

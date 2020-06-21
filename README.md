@@ -33,6 +33,7 @@
   - [JS基础](./JavaScript/base)
   - [ES6重新整理](./JavaScript/ES6)
   - [几种判断类型的方法](./JavaScript/checkType)
+  - [终极深拷贝](./JavaScript/copy)
   - [ajax/fetch](./JavaScript/Fetch)
   - [JS方法实现(建设中)]()
   - [JS执行上下文与作用域链](./JavaScript/Scope)
