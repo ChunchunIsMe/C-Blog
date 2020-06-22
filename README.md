@@ -45,6 +45,7 @@
   - [如何判断DOM是否在窗口中出现](./JavaScript/lazy)
   - [DOM](./JavaScript/DOM)
   - [BOM(建设中)](./JavaScript/BOM)
+  - [File&Blob](./JavaScript/File&Blob)
   - [WebWorker](./JavaScript/WebWorker)
 ### node
   - [node模块(建设中)]()
