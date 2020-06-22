@@ -47,6 +47,9 @@
   - options encoding 用于解释结果字符串的字符编码
 17. os.version() 返回内核版本的字符串
 ### process
+`process`对象是一个全局变量,提供了有关当前Node.js进程的信息并对其进行控制。作为全局变量,它始终可供Node.js应用程序使用,无需使用`require()`。但他也可以使用`require()`显示访问
+##### 事件
+1. before
+##### 属性与方法
 ### child_process
-`child_process`模块提供了衍生子进程的能力
 ### cluster
