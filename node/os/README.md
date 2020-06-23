@@ -49,7 +49,30 @@
 ### process
 `process`对象是一个全局变量,提供了有关当前Node.js进程的信息并对其进行控制。作为全局变量,它始终可供Node.js应用程序使用,无需使用`require()`。但他也可以使用`require()`显示访问
 ##### 事件
-1. before
+1. beforeExit 当Node.js清空其事件循环并且没有其他任务要安排时
+2. disconnect 如果使用IPC通道衍生Node.js进程,则在IPC通道关闭时将触发`disconnect`事件。
+3. exit 当Node.js进程因以下原因之一即将退出时将会触发`exit`事件
+  - 显示调用`process.exit()`
+  - Node.js事件循环不需要执行任何其他工作
+4. message 如果使用IPC通道衍生Node.js进程,则只要子进程收到父进程使用`childprocess.send()`发送的消息,就会触发`message`事件。
+5. multipleResolves 只要`Promise`有以下情况,就会触发
+  - reslove不止一次
+  - reject不止一次
+  - resolve后reject
+  - reject后resolve
+6. rejectionHandled 每当`Promise`被拒绝并且错误处理函数附加到它晚于一个Node.js事件循环时,就会触发`rejectionHandled`事件
+7. uncaughtException 当未捕获的JavaScript异常一直冒泡回到事件循环时,会触发`uncaughtException`事件。
+8. uncaughtExceptionMonitor
+9. unhandledRejection 如果在一次事件循环的一次轮询中,一个Promise被拒绝,且此Promise没有绑定错误处理器就会被触发
+10. warning 事件 Node.js触发进程警告,就会触发warning事件。
 ##### 属性与方法
+1. process.abort() 会使Node.js进程立即结束,并生成一个核心文件
+2. process.allowedNodeEnvironmentFlags 是`NODE_OPTIONS`环境变量中允许的特殊只读标志的`set`
+3. process.arch 为其编译的操作系统CPU架构。可能有`x64`或者`x32`等
+4. process.argv 会返回一个数组,其中包含Node.js进程被启动时传入的命令行参数。
+5. process.argv() 属性保存Node.js启动时传入的`argv[0]`的原始值的只读脚本
+6. process.channel 如果Node.js进程是由IPC通道方式创建的,process.channel属性保存IPC通道的引用。如果不是则为`undefined`
+7. process.chdir(directory) 方法更变Node.js进程的当前工作目录,如果失败则会抛出异常
+8. process.config 返回一个Object,其中包含用于编译当前Node.js可执行文件的配置选项的JavaScript表示形式
 ### child_process
 ### cluster
