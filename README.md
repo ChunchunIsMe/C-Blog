@@ -72,6 +72,7 @@
   - [setState原理(建设中)](./react/setState)
   - [hook原理(建设中)](./react/hook)
   - [fiber架构(建设中)](./react/fiber)
+  - [自动化测试(建设中)](./react/test)
 ### npm/yarn
   - [npm用法和介绍](./npm/introduction)
 ### webpack
