@@ -76,3 +76,31 @@ nextTick方法将callback添加到下一个时间点的队列。在JavaScript堆
 返回值 <Immediate> 对象 可以传给 `clearImmediate()`取消已安排的活动
 
 安排在IO事件的回调之后执行的callback
+
+## 有趣的事件循环
+```
+const ele = document.getElementById('div');
+ele.addEventListener('click', () => {
+  Promise.resolve().then(() => {console.log(1)})
+  console.log('click1')
+})
+ele.addEventListener('click',() => {
+  Promise.resolve().then(() => {console.log(2)})
+  console.log('click2')
+})
+ele.click();
+```
+上述代码,如果是点击`ele`那么回调将会推送到宏任务队列,那么上述代码的打印顺序将是
+```
+click1
+1
+click2
+2
+```
+但是如果直接调用`ele.click()`方法,那么回调将当做当前宏任务代码直接调用(相当于直接调用函数),那么上述代码的打印顺序将是
+```
+click1
+click2
+1
+2
+```
