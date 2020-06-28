@@ -68,7 +68,7 @@
   - [history源码分析](https://github.com/ChunchunIsMe/history-source-code)
   - [react-router源码分析](https://github.com/ChunchunIsMe/react-router-source-code)
   - [手写diff](./react/virtualDom)
-  - [react生命周期(建设中)](./react/lifeCircle)
+  - [react生命周期](./react/lifeCircle)
   - [setState原理(建设中)](./react/setState)
   - [hook原理(建设中)](./react/hook)
   - [fiber架构(建设中)](./react/fiber)
