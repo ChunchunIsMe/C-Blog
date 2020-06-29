@@ -48,6 +48,8 @@ if(req.method==='OPTIONS') {
 - access-control-max-age (重要！！)响应头,表示预检请求返回的结果可以被缓存多久(这个options请求可以被缓存!!!)
 - access-control-request-headers 出现在预检请求头中,用于通知服务器在真正的请求中会采用哪些请求头
 - access-control-request-method 出现在预检请求头中,用于通知服务器在正常的请求中会采用那种Methods
+
+还有需要注意的是浏览器模式是不允许预检请求的重定向的,因为预检请求只要返回的不是`2XX`开头的,都会当做错误处理
 ### document.domain
 在资源和浏览器二级域名相同的情况下,比如`c.a.com`和`b.a.com`我们就可以使用`document.domain = a.com`
 ### postMessage
