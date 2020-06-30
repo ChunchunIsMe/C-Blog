@@ -35,7 +35,7 @@
   - [几种判断类型的方法](./JavaScript/checkType)
   - [终极深拷贝](./JavaScript/copy/copy.js)
   - [ajax/fetch](./JavaScript/Fetch)
-  - [JS方法实现(建设中)]()
+  - [JS方法实现](./JavaScript/writeFun)
   - [JS执行上下文与作用域链](./JavaScript/Scope)
   - [用浏览器展示WeakSet/WeakMap](./JavaScript/Weak)
   - [纯前端mock](https://github.com/ChunchunIsMe/ObjectDefineMock)
