@@ -6,7 +6,7 @@ function checkInWindow(dom) {
 const dom = document.getElementById('img');
 function run() {
   if (checkInWindow(dom)) {
-    dom.setAttribute('src', './img/q.jpg');
+    dom.setAttribute('src', '../img/q.jpg');
     window.removeEventListener('scroll', run);
   }
 }
