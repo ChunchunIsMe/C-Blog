@@ -4,3 +4,4 @@
 - [promise](./promise.js)
 - [flat](./flat.js)
 - [instanceof](./instanceof.js)
+- [isNaN](./isNaN.js)

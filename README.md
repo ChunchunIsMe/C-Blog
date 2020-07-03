@@ -47,6 +47,7 @@
   - [BOM(建设中)](./JavaScript/BOM)
   - [File&Blob](./JavaScript/File&Blob)
   - [WebWorker](./JavaScript/WebWorker)
+  - [为什么NaN!==NaN](./JavaScript/NaN)
 ### node
   - [node模块(建设中)]()
   - [express简单实现](https://github.com/ChunchunIsMe/LearningNode/tree/master/expressSourceCode/selfCreate)
