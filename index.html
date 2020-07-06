@@ -71,7 +71,7 @@
     <div class="isshow" style="z-index: 2;">♥♥♥</div>
   </div>
   <div>1323123123123</div>
-  <p>222</p>
+  <p id="p">222</p>
   <div>1323123123123</div>
   <div class="tran"></div>
   <div class="animation"></div>
@@ -98,6 +98,20 @@
       console.log('click2')
     })
     ele.click();
+    const p = document.getElementById('p');
+    p.addEventListener('click', () => {
+      console.log(performance.timing);
+      requestAnimationFrame(() => {
+        console.log(123);
+      })
+      p.style.height = "100px";
+    })
+    requestAnimationFrame(() => {
+      console.log(123);
+    })
+    window.onload = () => {
+      console.log(performance.timing);
+    }
   </script>
 </body>
 

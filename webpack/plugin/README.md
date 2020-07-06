@@ -8,7 +8,9 @@
  - uglifyjs-webpack-plugin: js tree-shake
  - webpack.HotModuleReplacementPlugin: 开启热更新
  - webpack.NamedModulesPlugin: 开启HMR时使用插件会显示相对路径(位置必须在HMR后面)
+ - webpack.ProvidePlugin: 将npm包中的东西提前引入
+ - webpack.DllPlugin: 开启dll打包
  - webpack-spritesmith: 将图片合成雪碧图
- - happy-pack: 多线程打包
+ - happy-pack: 多进程打包
  - compression-webpack-plugin 将代码进行gzip压缩 注意这里使用gzip压缩之后要在响应头上加上`Content-Encoding: gzip`
  - prerender-spa-plugin 预渲染,原理是webpack构建完成之后,启动预渲染,然后捕捉页面再输出html到dist

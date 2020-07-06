@@ -73,6 +73,7 @@ function copyMap(map, circle = new Map()) {
         realVal = map.get(key);
       }
     }
+    result.set(realKey, realVal);
   }
   return result;
 }
