@@ -63,6 +63,7 @@
     background: #eee;</div>
 
   <div style="width: 0;height: 0;border: 10px solid transparent;border-bottom: 10px solid red;"></div> -->
+  <div id="div">123123123123123123123123123123123123</div>
   <div style="position: relative;">
     <div>♡♡♡</div>
     <div class="isshow" style="z-index: 4;">♥</div>
@@ -87,6 +88,16 @@
     }
     out = a();
     out();
+    const ele = document.getElementById('div');
+    ele.addEventListener('click', () => {
+      Promise.resolve().then(() => {console.log(1)})
+      console.log('click1')
+    })
+    ele.addEventListener('click',() => {
+      Promise.resolve().then(() => {console.log(2)})
+      console.log('click2')
+    })
+    ele.click();
   </script>
 </body>
 
