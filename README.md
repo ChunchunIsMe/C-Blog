@@ -48,6 +48,8 @@
   - [File&Blob](./JavaScript/File&Blob)
   - [WebWorker](./JavaScript/WebWorker)
   - [为什么NaN!==NaN](./JavaScript/NaN)
+  - [百度图片展示(建设中)]()
+  - [模态框出现的问题(建设中)]()
 ### node
   - [node模块(建设中)]()
   - [express简单实现](https://github.com/ChunchunIsMe/LearningNode/tree/master/expressSourceCode/selfCreate)
@@ -55,6 +57,7 @@
   - [mock中间件](https://github.com/ChunchunIsMe/ServerMock)
   - [EventLoop](./node/EventLoop)
   - [线程与进程(建设中)](./node/os)
+  - [爬取自定义字体爬虫(建设中)]()
 ### 浏览器
   - [pwa](https://github.com/ChunchunIsMe/learningPWA)
   - [V8GC](./browser/V8GC)
