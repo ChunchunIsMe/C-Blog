@@ -49,7 +49,7 @@
   - [WebWorker](./JavaScript/WebWorker)
   - [为什么NaN!==NaN](./JavaScript/NaN)
   - [百度图片展示(建设中)]()
-  - [模态框出现的问题(建设中)](./JavaScript/Modal);
+  - [模态框出现的问题](./JavaScript/Modal);
   - [defineProperty(建设中)]()
 ### node
   - [node模块(建设中)]()
