@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">弹窗</button>
+  <div style="height: 200vh"></div>
+  <script src="./index.js"></script>
+  <script>
+    const btn = document.getElementById('btn');
+    function popup(index = 0) {
+      const dom = document.createElement('div');
+      dom.innerText = '点击再来一个弹窗' + index;
+      dom.addEventListener('click', () => {
+        popup(index + 1)
+      })
+      Modal({ children: dom });
+    }
+    btn.addEventListener('click', () => {
+      popup()
+    });
+  </script>
+</body>
+
+</html>

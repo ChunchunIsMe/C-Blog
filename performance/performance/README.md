@@ -67,7 +67,7 @@ W3C中有张图很明确的说明了时间的各个阶段
 接下来我们捕获一些js错误
 
 - window.onerror 如果js脚本出错了将会触发这个事件
-- window.onrejectionhandled 如果存在promise变成了rejected状态没有被catch函数或者then捕获将会触发这个事件
+- window.onunhandledrejection 如果存在promise变成了rejected状态没有被catch函数或者then捕获将会触发这个事件
 
 上面都是一些js错误或者页面加载的监控,如果我们需要监听ajax的请求时间或者错误请求该怎么办
 
