@@ -163,6 +163,8 @@
       dom.appendChild(div);
     }
     function setImg(imgs, dom) {
+      dom.innerHTML = '';
+      let id = null;
       dom.style.padding = '10px';
       const domWidth = parseInt(window.getComputedStyle(dom).getPropertyValue('width'));
       imgs.then(res => {
