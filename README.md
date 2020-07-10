@@ -48,8 +48,8 @@
   - [File&Blob](./JavaScript/File&Blob)
   - [WebWorker](./JavaScript/WebWorker)
   - [为什么NaN!==NaN](./JavaScript/NaN)
-  - [百度图片展示(等高瀑布流)(建设中)](./JavaScript/baiduPic)
-  - [模态框出现的问题](./JavaScript/Modal);
+  - [等宽瀑布流和等高瀑布流](./JavaScript/waterfallPic)
+  - [模态框出现的问题](./JavaScript/Modal)
   - [defineProperty(建设中)]()
 ### node
   - [node模块(建设中)]()

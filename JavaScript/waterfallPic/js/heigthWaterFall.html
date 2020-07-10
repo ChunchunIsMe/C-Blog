@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='div' style="font-size: 0;"></div>
+  <script>
+    const urls = [
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/650/480",
+      "https://placekitten.com/660/470",
+      "https://placekitten.com/670/460",
+      "https://placekitten.com/680/450",
+      "https://placekitten.com/670/440",
+      "https://placekitten.com/660/430",
+      "https://placekitten.com/650/420",
+      "https://placekitten.com/640/410",
+      "https://placekitten.com/630/400",
+      "https://placekitten.com/620/410",
+      "https://placekitten.com/610/420",
+      "https://placekitten.com/600/430",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/650/480",
+      "https://placekitten.com/660/470",
+      "https://placekitten.com/670/460",
+      "https://placekitten.com/680/450",
+      "https://placekitten.com/670/440",
+      "https://placekitten.com/660/430",
+      "https://placekitten.com/650/420",
+      "https://placekitten.com/640/410",
+      "https://placekitten.com/630/400",
+      "https://placekitten.com/620/410",
+      "https://placekitten.com/610/420",
+      "https://placekitten.com/600/430",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/650/480",
+      "https://placekitten.com/660/470",
+      "https://placekitten.com/670/460",
+      "https://placekitten.com/680/450",
+      "https://placekitten.com/670/440",
+      "https://placekitten.com/660/430",
+      "https://placekitten.com/650/420",
+      "https://placekitten.com/640/410",
+      "https://placekitten.com/630/400",
+      "https://placekitten.com/620/410",
+      "https://placekitten.com/610/420",
+      "https://placekitten.com/600/430",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/650/480",
+      "https://placekitten.com/660/470",
+      "https://placekitten.com/670/460",
+      "https://placekitten.com/680/450",
+      "https://placekitten.com/670/440",
+      "https://placekitten.com/660/430",
+      "https://placekitten.com/650/420",
+      "https://placekitten.com/640/410",
+      "https://placekitten.com/630/400",
+      "https://placekitten.com/620/410",
+      "https://placekitten.com/610/420",
+      "https://placekitten.com/600/430",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/650/480",
+      "https://placekitten.com/660/470",
+      "https://placekitten.com/670/460",
+      "https://placekitten.com/680/450",
+      "https://placekitten.com/670/440",
+      "https://placekitten.com/660/430",
+      "https://placekitten.com/650/420",
+      "https://placekitten.com/640/410",
+      "https://placekitten.com/630/400",
+      "https://placekitten.com/620/410",
+      "https://placekitten.com/610/420",
+      "https://placekitten.com/600/430",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/650/480",
+      "https://placekitten.com/660/470",
+      "https://placekitten.com/670/460",
+      "https://placekitten.com/680/450",
+      "https://placekitten.com/670/440",
+      "https://placekitten.com/660/430",
+      "https://placekitten.com/650/420",
+      "https://placekitten.com/640/410",
+      "https://placekitten.com/630/400",
+      "https://placekitten.com/620/410",
+      "https://placekitten.com/610/420",
+      "https://placekitten.com/600/430",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/750",
+      "https://placekitten.com/630/860",
+      "https://placekitten.com/640/470",
+    ];
+    function loadImg(urls) {
+      const pro = [];
+      urls.forEach(url => {
+        const promise = new Promise((re) => {
+          const img = new Image();
+          img.src = url;
+          img.onload = () => {
+            img.width = (200 / img.height) * img.width;
+            img.height = 200;
+            re(img)
+          }
+        })
+        pro.push(promise);
+      })
+      return Promise.all(pro);
+    }
+    const imgs = loadImg(urls);
+
+    function insertImg(columnImg, columnWidth, dom, de) {
+      const height = 200 + (200 / columnWidth) * de;
+      const div = document.createElement('div');
+      div.style.whiteSpace = 'nowrap';
+      columnImg.forEach(item => {
+        item.height = height;
+        item.removeAttribute('width');
+        div.appendChild(item);
+      })
+      dom.appendChild(div);
+    }
+    function setImg(imgs, dom) {
+      dom.style.padding = '10px';
+      const domWidth = parseInt(window.getComputedStyle(dom).getPropertyValue('width'));
+      imgs.then(res => {
+        let columnWidth = 0, columnImg = [];
+        res.forEach((item, i) => {
+          const width = item.width;
+          const de = domWidth - columnWidth;
+          if (de > width / 2 && i !== res.length - 1) {
+            columnImg.push(item);
+            columnWidth += width;
+          } else {
+            insertImg(columnImg, columnWidth, dom, de);
+            columnWidth = width; columnImg = [item];
+          }
+        })
+      })
+    }
+    setImg(imgs, document.getElementById('div'));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <div>
+
+  </div>
+  <script>
+    const urls = [
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+      "https://placekitten.com/650/480",
+      "https://placekitten.com/660/470",
+      "https://placekitten.com/670/460",
+      "https://placekitten.com/680/450",
+      "https://placekitten.com/670/440",
+      "https://placekitten.com/660/430",
+      "https://placekitten.com/650/420",
+      "https://placekitten.com/640/410",
+      "https://placekitten.com/630/400",
+      "https://placekitten.com/620/410",
+      "https://placekitten.com/610/420",
+      "https://placekitten.com/600/430",
+      "https://placekitten.com/610/440",
+      "https://placekitten.com/620/450",
+      "https://placekitten.com/630/460",
+      "https://placekitten.com/640/470",
+    ];
+
+    function getMinHeight(doms) {
+      let minIndex = 0, minHeight = parseInt(window.getComputedStyle(doms[0]).getPropertyValue('height'));
+      doms.forEach((dom, i) => {
+        const height = parseInt(window.getComputedStyle(dom).getPropertyValue('height'));
+        if (height < minHeight) {
+          minIndex = i;
+          minHeight = height;
+        }
+      })
+      return minIndex;
+    }
+    function widthWaterFall(urls, count) {
+      const wrap = document.createElement('div');
+      wrap.setAttribute('style', 'display:flex;align-items:flex-start');
+      const lineWrap = [];
+      for (let i = 0; i < count; i++) {
+        const line = document.createElement('div');
+        line.setAttribute('style', 'flex:1;font-size:0;');
+        lineWrap.push(line);
+        wrap.appendChild(line);
+      }
+      let i = 0;
+      function setImg(i) {
+        if(!urls[i]) {
+          return;
+        }
+        const index = getMinHeight(lineWrap);
+        const img = document.createElement('img');
+        img.setAttribute('src', urls[i]);
+        img.setAttribute('style', 'width:100%;');
+        lineWrap[index].appendChild(img);
+        img.onload = () => {
+          setImg(++i);
+        }
+      }
+      setImg(i);
+      document.body.appendChild(wrap);
+    }
+    widthWaterFall(urls, 5);
+  </script>
+</body>
+
+</html>
