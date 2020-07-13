@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div style="width:90%;height:50vh;position: relative;" id="div"></div>
+  <script>
+    const dom = document.getElementById('div');
+    const container = document.createElement('div');
+    container.style.cssText = 'background:red;position:absolute;top:0;bottom:0;left:0;right:0;z-index=-10000;overflow:scroll;';
+    const copyContainer = container.cloneNode(false);
+    const child = document.createElement('div');
+    child.style.cssText = 'transition:0s;animation:none;';
+    const copyChild = child.cloneNode(false);
+    child.style.width = `10000px`;
+    child.style.height = `10000px`;
+    copyChild.style.width = `250%`;
+    copyChild.style.height = `250%`;
+    container.appendChild(child);
+    copyContainer.appendChild(copyChild);
+    dom.appendChild(container);
+    dom.appendChild(copyContainer);
+    function scroll(e) {
+      console.log(e, Date.now())
+      container.scrollTop = copyContainer.scrollTop = 1000000;
+      container.scrollLeft = copyContainer.scrollLeft = 1000000;
+      console.log(container.scrollTop, copyContainer.scrollTop);
+    }
+    scroll();
+    container.onscroll = scroll;
+    copyContainer.onscroll = scroll;
+
+  </script>
+</body>
+
+</html>
