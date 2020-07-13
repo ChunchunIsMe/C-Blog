@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text">
+  <input type="text">
+  <input type="text">
+  <div id="div"></div>
+  <script>
+    const div = document.getElementById('div');
+    const inputs = document.getElementsByTagName('input');
+    const obj = ['', '', ''];
+    Object.defineProperties(obj, {
+      input0: {
+        set(e) {
+          this[0] = e;
+          div.innerText = `${this[0]},${this[1]},${this[2]}`;
+        }
+      },
+      input1: {
+        set(e) {
+          this[1] = e;
+          div.innerText = `${this[0]},${this[1]},${this[2]}`;
+        }
+      },
+      input2: {
+        set(e) {
+          this[2] = e;
+          div.innerText = `${this[0]},${this[1]},${this[2]}`;
+        }
+      }
+    })
+    for (let i = 0; i < inputs.length; i++) {
+      const ele = inputs[i];
+      ele.addEventListener('input', e => {
+        const key = `input${i}`
+        obj[key] = e.target.value;
+      })
+    }
+  </script>
+</body>
+
+</html>

@@ -50,7 +50,7 @@
   - [为什么NaN!==NaN](./JavaScript/NaN)
   - [等宽瀑布流和等高瀑布流](./JavaScript/waterfallPic)
   - [模态框出现的问题](./JavaScript/Modal)
-  - [defineProperty(建设中)]()
+  - [defineProperty&defineProperties](./JavaScript/defineProperty)
 ### node
   - [node模块(建设中)]()
   - [express简单实现](https://github.com/ChunchunIsMe/LearningNode/tree/master/expressSourceCode/selfCreate)
