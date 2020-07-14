@@ -20,6 +20,7 @@
 ### html
   - [link标签的预加载和预解析](./html/link)
   - [meta](./html/meta)
+  - [html中使用ESModule](./html/esmodule)
 ### css
   - [盒模型](./css/box)
   - [BFC](./css/BFC)
@@ -51,6 +52,7 @@
   - [等宽瀑布流和等高瀑布流](./JavaScript/waterfallPic)
   - [模态框出现的问题](./JavaScript/Modal)
   - [defineProperty&defineProperties](./JavaScript/defineProperty)
+  - [监听dom尺寸大小变化](./JavaScript/domResize)
 ### node
   - [node模块(建设中)]()
   - [express简单实现](https://github.com/ChunchunIsMe/LearningNode/tree/master/expressSourceCode/selfCreate)
